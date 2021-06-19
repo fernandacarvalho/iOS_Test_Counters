@@ -50,9 +50,9 @@ final class Button: UIButton {
 private extension Button {
 
     enum ColorConstants {
-        static let accentColor = UIColor(named: "AccentColor")
-        static let textColor = UIColor(named: "ButtonText")
-        static let disabledColor = accentColor?.withAlphaComponent(0.5)
+        static let accentColor = UIColor.accentColor
+        static let textColor = UIColor.buttonText
+        static let disabledColor = accentColor.withAlphaComponent(0.5)
     }
 
     enum LayoutConstants {

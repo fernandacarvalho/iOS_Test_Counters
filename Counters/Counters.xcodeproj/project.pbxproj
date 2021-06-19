@@ -20,6 +20,7 @@
 		DECA258325CC8D4300851431 /* CountersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA258225CC8D4300851431 /* CountersTests.swift */; };
 		DECA258E25CC8D4300851431 /* CountersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA258D25CC8D4300851431 /* CountersUITests.swift */; };
 		DEED7FCE25CC975D00BA0CDB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DEED7FD025CC975D00BA0CDB /* Localizable.strings */; };
+		EF6D56F9267D8BEA00FC79E1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		DECA258D25CC8D4300851431 /* CountersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersUITests.swift; sourceTree = "<group>"; };
 		DECA258F25CC8D4300851431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEED7FCF25CC975D00BA0CDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				350AF6EC25E0365A0000F698 /* UIImage+Badge.swift */,
+				EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				35868D2825E03F090028AF1D /* WelcomeViewPresenter.swift in Sources */,
 				350AF6ED25E0365A0000F698 /* UIImage+Badge.swift in Sources */,
 				DECA257025CC8D4200851431 /* WelcomeViewController.swift in Sources */,
+				EF6D56F9267D8BEA00FC79E1 /* UIColor+Extension.swift in Sources */,
 				DECA256C25CC8D4200851431 /* AppDelegate.swift in Sources */,
 				DE3EBACC25E048CE00DA1E0D /* Button.swift in Sources */,
 				35EAFB7925CC9E3B00DCFE10 /* Networking.m in Sources */,
