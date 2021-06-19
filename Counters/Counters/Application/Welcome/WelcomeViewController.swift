@@ -32,12 +32,18 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         additionalSafeAreaInsets = Constants.additionalInsets
-        innerView.configure(with: presenter.viewModel)
+        innerView.configure(with: presenter.viewModel, andDelegate: self)
     }
 }
 
 private extension WelcomeViewController {
     enum Constants {
         static let additionalInsets = UIEdgeInsets(top: 26, left: 39, bottom: 20, right: 39)
+    }
+}
+
+extension WelcomeViewController: WelcomeViewDelegate {
+    func didPressContinueBtn() {
+        AppNavigator.sharedInstance.goToHome(withTransition: true)
     }
 }

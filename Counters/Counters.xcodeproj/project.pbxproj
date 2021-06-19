@@ -20,7 +20,16 @@
 		DECA258325CC8D4300851431 /* CountersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA258225CC8D4300851431 /* CountersTests.swift */; };
 		DECA258E25CC8D4300851431 /* CountersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA258D25CC8D4300851431 /* CountersUITests.swift */; };
 		DEED7FCE25CC975D00BA0CDB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DEED7FD025CC975D00BA0CDB /* Localizable.strings */; };
+		EF15AF54267DA1C9003D36BF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF53267DA1C9003D36BF /* BaseViewController.swift */; };
+		EF15AF57267DA22C003D36BF /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF56267DA22C003D36BF /* ActivityIndicatorView.swift */; };
+		EF15AF59267DA4B9003D36BF /* GenericPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF58267DA4B9003D36BF /* GenericPlaceholderView.swift */; };
+		EF15AF5B267DA83E003D36BF /* ScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF5A267DA83E003D36BF /* ScreenSizes.swift */; };
 		EF6D56F9267D8BEA00FC79E1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */; };
+		EF6D56FD267D990300FC79E1 /* CountersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D56FC267D990300FC79E1 /* CountersListViewController.swift */; };
+		EF6D56FF267D991A00FC79E1 /* CountersListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6D56FE267D991A00FC79E1 /* CountersListView.xib */; };
+		EF6D5701267D993300FC79E1 /* CountersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D5700267D993300FC79E1 /* CountersListView.swift */; };
+		EF6D5704267D9B5500FC79E1 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D5703267D9B5500FC79E1 /* MainNavigationController.swift */; };
+		EF6D5706267D9CAD00FC79E1 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D5705267D9CAD00FC79E1 /* AppNavigator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +71,16 @@
 		DECA258D25CC8D4300851431 /* CountersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersUITests.swift; sourceTree = "<group>"; };
 		DECA258F25CC8D4300851431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEED7FCF25CC975D00BA0CDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EF15AF53267DA1C9003D36BF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		EF15AF56267DA22C003D36BF /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		EF15AF58267DA4B9003D36BF /* GenericPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPlaceholderView.swift; sourceTree = "<group>"; };
+		EF15AF5A267DA83E003D36BF /* ScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSizes.swift; sourceTree = "<group>"; };
 		EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		EF6D56FC267D990300FC79E1 /* CountersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersListViewController.swift; sourceTree = "<group>"; };
+		EF6D56FE267D991A00FC79E1 /* CountersListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountersListView.xib; sourceTree = "<group>"; };
+		EF6D5700267D993300FC79E1 /* CountersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersListView.swift; sourceTree = "<group>"; };
+		EF6D5703267D9B5500FC79E1 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		EF6D5705267D9CAD00FC79E1 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				DE3EBACB25E048CE00DA1E0D /* Button.swift */,
+				EF15AF58267DA4B9003D36BF /* GenericPlaceholderView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -184,11 +203,15 @@
 		DECA25AA25CC8FD600851431 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				EF15AF55267DA20D003D36BF /* Utils */,
+				EF15AF52267DA1B0003D36BF /* Base */,
+				EF6D5702267D9A9200FC79E1 /* Navigation */,
 				35868D2F25E0522E0028AF1D /* Extensions */,
 				35EAFB7425CC9E0800DCFE10 /* Services */,
 				DECA25AE25CC908800851431 /* AppDelegate */,
 				DECA25AD25CC906700851431 /* Launch */,
 				DECA25B225CC910100851431 /* Welcome */,
+				EF6D56FA267D96E600FC79E1 /* CounterList */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -236,6 +259,50 @@
 				350AF6D825E02D5E0000F698 /* WelcomeView.swift */,
 			);
 			path = Welcome;
+			sourceTree = "<group>";
+		};
+		EF15AF52267DA1B0003D36BF /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EF15AF53267DA1C9003D36BF /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		EF15AF55267DA20D003D36BF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EF15AF56267DA22C003D36BF /* ActivityIndicatorView.swift */,
+				EF15AF5A267DA83E003D36BF /* ScreenSizes.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EF6D56FA267D96E600FC79E1 /* CounterList */ = {
+			isa = PBXGroup;
+			children = (
+				EF6D56FB267D96F800FC79E1 /* View */,
+			);
+			path = CounterList;
+			sourceTree = "<group>";
+		};
+		EF6D56FB267D96F800FC79E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EF6D56FC267D990300FC79E1 /* CountersListViewController.swift */,
+				EF6D56FE267D991A00FC79E1 /* CountersListView.xib */,
+				EF6D5700267D993300FC79E1 /* CountersListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EF6D5702267D9A9200FC79E1 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				EF6D5703267D9B5500FC79E1 /* MainNavigationController.swift */,
+				EF6D5705267D9CAD00FC79E1 /* AppNavigator.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +412,7 @@
 				DECA257825CC8D4300851431 /* LaunchScreen.storyboard in Resources */,
 				DEED7FCE25CC975D00BA0CDB /* Localizable.strings in Resources */,
 				DECA257525CC8D4300851431 /* Assets.xcassets in Resources */,
+				EF6D56FF267D991A00FC79E1 /* CountersListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,13 +439,21 @@
 			files = (
 				35868D2825E03F090028AF1D /* WelcomeViewPresenter.swift in Sources */,
 				350AF6ED25E0365A0000F698 /* UIImage+Badge.swift in Sources */,
+				EF15AF59267DA4B9003D36BF /* GenericPlaceholderView.swift in Sources */,
+				EF6D56FD267D990300FC79E1 /* CountersListViewController.swift in Sources */,
 				DECA257025CC8D4200851431 /* WelcomeViewController.swift in Sources */,
 				EF6D56F9267D8BEA00FC79E1 /* UIColor+Extension.swift in Sources */,
+				EF15AF54267DA1C9003D36BF /* BaseViewController.swift in Sources */,
+				EF15AF57267DA22C003D36BF /* ActivityIndicatorView.swift in Sources */,
 				DECA256C25CC8D4200851431 /* AppDelegate.swift in Sources */,
+				EF6D5704267D9B5500FC79E1 /* MainNavigationController.swift in Sources */,
 				DE3EBACC25E048CE00DA1E0D /* Button.swift in Sources */,
+				EF6D5701267D993300FC79E1 /* CountersListView.swift in Sources */,
+				EF6D5706267D9CAD00FC79E1 /* AppNavigator.swift in Sources */,
 				35EAFB7925CC9E3B00DCFE10 /* Networking.m in Sources */,
 				350AF6D925E02D5E0000F698 /* WelcomeView.swift in Sources */,
 				350AF6E425E035840000F698 /* WelcomeFeatureView.swift in Sources */,
+				EF15AF5B267DA83E003D36BF /* ScreenSizes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

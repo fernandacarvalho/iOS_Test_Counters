@@ -6,6 +6,10 @@
 
 import UIKit
 
+protocol WelcomeViewDelegate {
+    func didPressContinueBtn()
+}
+
 internal final class WelcomeView: UIView {
     // MARK: - View Model
     
@@ -15,6 +19,8 @@ internal final class WelcomeView: UIView {
         let features: [WelcomeFeatureView.ViewModel]
         let buttonTitle: String
     }
+    
+    private var delegate: WelcomeViewDelegate?
     
     // MARK: - Properties
     
@@ -39,7 +45,8 @@ internal final class WelcomeView: UIView {
     
     // MARK: - Configuration
     
-    func configure(with viewModel: ViewModel) {
+    func configure(with viewModel: ViewModel, andDelegate delegate: WelcomeViewDelegate) {
+        self.delegate = delegate
         titleLabel.attributedText = viewModel.title
         subtitleLabel.attributedText = .init(string: viewModel.description,
                                              attributes: [.kern: Font.kern])
@@ -201,6 +208,6 @@ private extension WelcomeView {
 
 private extension WelcomeView {
     @objc func didPressContinue() {
-        
+        self.delegate?.didPressContinueBtn()
     }
 }

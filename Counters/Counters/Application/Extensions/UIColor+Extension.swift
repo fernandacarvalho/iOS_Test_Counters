@@ -57,7 +57,7 @@ extension UIColor {
         static var green: UIColor
     
     @Theme(light: UIColor(named: "PrimaryText") ?? UIColor(hexString: "#000000"),
-               dark: UIColor(named: "PrimaryText") ?? UIColor(hexString: "#000000"))
+               dark: UIColor(named: "PrimaryText") ?? UIColor(hexString: "#D3D3D3"))
         static var primaryText: UIColor
     
     @Theme(light: UIColor(named: "Red") ?? UIColor(hexString: "#FF3A2F"),
