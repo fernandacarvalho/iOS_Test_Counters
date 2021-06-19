@@ -8,7 +8,7 @@ import UIKit
 
 internal final class WelcomeView: UIView {
     // MARK: - View Model
-
+    
     struct ViewModel {
         let title: NSAttributedString
         let description: String
@@ -17,12 +17,14 @@ internal final class WelcomeView: UIView {
     }
     
     // MARK: - Properties
-
+    
+    private let scrollView = UIScrollView()
+    private let scrollContentView = UIView()
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
     private let stackView = UIStackView()
     private let button = Button()
-
+    
     // MARK: - Initialization
     
     init() {
@@ -40,7 +42,7 @@ internal final class WelcomeView: UIView {
     func configure(with viewModel: ViewModel) {
         titleLabel.attributedText = viewModel.title
         subtitleLabel.attributedText = .init(string: viewModel.description,
-                                                attributes: [.kern: Font.kern])
+                                             attributes: [.kern: Font.kern])
         
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         viewModel.features.forEach {
@@ -60,6 +62,7 @@ private extension WelcomeView {
         static let spacing: CGFloat = 24
         static let buttonHeight: CGFloat = 57
         static let stackViewTopMargin: CGFloat = 45
+        static let stackViewBottomMargin: CGFloat = 45
     }
     
     enum Font {
@@ -81,13 +84,22 @@ private extension WelcomeView {
 private extension WelcomeView {
     func setup() {
         backgroundColor = .systemBackground
-
+        
+        setupScrollView()
         setupTitleLabel()
         setupSubtitleLabel()
         setupStackView()
         setupButton()
         setupViewHierarchy()
         setupConstraints()
+    }
+    
+    func setupScrollView() {
+        self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollContentView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollView.backgroundColor = .clear
+        self.scrollView.showsVerticalScrollIndicator = false
+        self.scrollContentView.backgroundColor = .clear
     }
     
     func setupTitleLabel() {
@@ -127,42 +139,62 @@ private extension WelcomeView {
     }
     
     func setupViewHierarchy() {
-        addSubview(titleLabel)
-        addSubview(subtitleLabel)
-        addSubview(stackView)
-        addSubview(button)
+        self.scrollView.addSubview(self.scrollContentView)
+        self.scrollContentView.addSubview(titleLabel)
+        self.scrollContentView.addSubview(subtitleLabel)
+        self.scrollContentView.addSubview(stackView)
+        self.scrollContentView.addSubview(button)
+        self.addSubview(self.scrollView)
     }
     
     func setupConstraints() {
         let guide = safeAreaLayoutGuide
         NSLayoutConstraint.activate([
+            //scrollView
+            scrollView.topAnchor.constraint(equalTo: guide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+            
+            //contentView
+            scrollContentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            scrollContentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            scrollContentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            scrollContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            scrollContentView.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            
             // title label
-            titleLabel.topAnchor.constraint(equalTo: guide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            titleLabel.topAnchor.constraint(equalTo: scrollContentView.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
             
             // subtitle label
             subtitleLabel.topAnchor.constraint(
                 equalTo: titleLabel.bottomAnchor,
                 constant: Constants.spacing
             ),
-            subtitleLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            subtitleLabel.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            subtitleLabel.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
+            subtitleLabel.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
             
             // stack view
-            stackView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            stackView.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
             stackView.topAnchor.constraint(
                 equalTo: subtitleLabel.bottomAnchor,
                 constant: Constants.stackViewTopMargin
             ),
+            
             // button
             button.heightAnchor.constraint(
-                greaterThanOrEqualToConstant: Constants.buttonHeight
+                equalToConstant: Constants.buttonHeight
             ),
-            button.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-            button.bottomAnchor.constraint(equalTo: guide.bottomAnchor)
+            button.topAnchor.constraint(
+                greaterThanOrEqualTo: stackView.bottomAnchor,
+                constant: Constants.stackViewBottomMargin
+            ),
+            button.leadingAnchor.constraint(equalTo: scrollContentView.leadingAnchor),
+            button.trailingAnchor.constraint(equalTo: scrollContentView.trailingAnchor),
+            button.bottomAnchor.constraint(equalTo: scrollContentView.bottomAnchor)
         ])
     }
 }
