@@ -17,7 +17,7 @@ class ActivityIndicatorView {
         vSpinner = nil
         let spinnerView = UIView.init(frame: UIScreen.main.bounds)
         spinnerView.backgroundColor = UIColor.clear
-        let ai = UIActivityIndicatorView.init(style: .gray)
+        let ai = UIActivityIndicatorView.init(style: .medium)
         ai.startAnimating()
         ai.center = spinnerView.center
         

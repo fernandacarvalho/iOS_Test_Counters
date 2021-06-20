@@ -28,7 +28,7 @@ class GenericPlaceholderView: UIControl {
     // MARK: - Setups
     
     fileprivate func setup() {
-        backgroundColor = .systemBackground
+        backgroundColor = .background
         setupStackView()
         setupTitleLabel()
         setupSubtitleLabel()
@@ -75,7 +75,7 @@ class GenericPlaceholderView: UIControl {
     }
     
     fileprivate func setupConstraints() {
-        NSLayoutConstraint.activate([            
+        NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
             stackView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, constant: -(Constants.margin))

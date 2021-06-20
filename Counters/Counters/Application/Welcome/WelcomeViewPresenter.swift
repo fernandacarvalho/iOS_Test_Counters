@@ -26,6 +26,7 @@ internal final class WelcomeViewPresenter {
             title: NSLocalizedString("WELCOME_COUNT_FEATURE_TITLE", comment: ""),
             subtitle: NSLocalizedString("WELCOME_COUNT_FEATURE_DESCRIPTION", comment: "")
         )]
+    
 }
 
 extension WelcomeViewPresenter: WelcomeViewControllerPresenter {

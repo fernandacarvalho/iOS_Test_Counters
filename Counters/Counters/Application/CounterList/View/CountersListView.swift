@@ -10,6 +10,8 @@ import UIKit
 
 protocol CountersListViewDelegate: AnyObject {
     func didClickAddButton()
+    func increaseCounter(counter: Counter)
+    func decreaseCounter(counter: Counter)
     func refreshList()
 }
 
@@ -20,10 +22,7 @@ private enum CellReuseIdentifier: String {
 class CountersListView: BaseView {
     
     // MARK: - View Model
-    
-    struct ViewModel {
-        let counters: [Counter]
-    }
+
     
     // MARK: - Properties
     
@@ -32,7 +31,11 @@ class CountersListView: BaseView {
     @IBOutlet weak var placeholderContainerView: UIView!
     
     private weak var delegate: CountersListViewDelegate?
-    private var viewModel: ViewModel?
+    var viewModel: CounterListViewModel? {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,25 +68,35 @@ class CountersListView: BaseView {
     //MARK: - Placeholder
     override func placeholderActionHandler() {
         super.placeholderActionHandler()
+        self.delegate?.didClickAddButton()
     }
     
     // MARK: - Configuration
     
-    func configure(with viewModel: ViewModel, andDelegate delegate: CountersListViewDelegate) {
+    func configure(with viewModel: CounterListViewModel?, andDelegate delegate: CountersListViewDelegate) {
+        self.setupTableView()
         self.configurePlaceholderView(parentView: self.placeholderContainerView)
         self.delegate = delegate
         self.viewModel = viewModel
-        self.setupTableView()
-        //self.setPlaceholderView(withTitle: "No counters yet", subtitle: "Some description text", btnTitle: "Create a counter")
+        self.checkEmptyList()
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.refreshValueChanged), for: .valueChanged)
         self.tableView.refreshControl = refreshControl
         self.tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.counter.rawValue)
+    }
+    
+    func checkEmptyList() {
+        if let count = self.viewModel?.counters?.count, count > 0 {
+            self.placeholderContainerView.isHidden = true
+        } else {
+            self.setPlaceholderView(withTitle: "No counters yet", subtitle: "Some description text.", btnTitle: "Create a counter")
+            self.placeholderContainerView.isHidden = false
+        }
     }
     
     //MARK: - Actions
@@ -97,11 +110,11 @@ class CountersListView: BaseView {
 
 extension CountersListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel?.counters.count ?? 0
+        return self.viewModel?.counters?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let counter = self.viewModel?.counters[indexPath.row] else {return UITableViewCell()}
+        guard let counter = self.viewModel?.counters?[indexPath.row] else {return UITableViewCell()}
         let cell = self.tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.counter.rawValue) as! CounterTableViewCell
         cell.configureCell(counter: counter, delegate: self)
         return cell
@@ -110,10 +123,10 @@ extension CountersListView: UITableViewDelegate, UITableViewDataSource {
 
 extension CountersListView: CounterTableViewCellDelegate {
     func didClickDecreaseBtn(counter: Counter) {
-        
+        self.delegate?.decreaseCounter(counter: counter)
     }
     
     func didClickIncreaseBtn(counter: Counter) {
-        
+        self.delegate?.increaseCounter(counter: counter)
     } 
 }

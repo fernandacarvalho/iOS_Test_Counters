@@ -39,9 +39,15 @@ class CounterTableViewCell: UITableViewCell {
     }
     
     @IBAction func decreaseCounterClicked(_ sender: Any) {
+        if let counter = self.counter {
+            self.delegate?.didClickDecreaseBtn(counter: counter)
+        }
     }
     
     @IBAction func increaseCounterClicked(_ sender: Any) {
+        if let counter = self.counter {
+            self.delegate?.didClickIncreaseBtn(counter: counter)
+        }
     }
     
 }

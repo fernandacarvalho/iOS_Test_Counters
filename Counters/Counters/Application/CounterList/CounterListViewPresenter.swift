@@ -7,24 +7,39 @@
 
 import Foundation
 
-internal final class CounterListViewPresenter {
-    private let counters: [Counter] = [
-        Counter(title: "teste 1", id: "1", count: 0),
-        Counter(title: "teste 2", id: "1", count: 2),
-        Counter(title: "teste 3", id: "1", count: 6),
-        Counter(title: "teste 4", id: "1", count: 3),
-        Counter(title: "teste 5", id: "1", count: 7),
-        Counter(title: "teste 6", id: "1", count: 0),
-        Counter(title: "teste 6", id: "1", count: 0),
-        Counter(title: "teste 8", id: "1", count: 4),
-        Counter(title: "teste 9", id: "1", count: 2),
-        Counter(title: "teste 10", id: "1", count: 0),
-        Counter(title: "teste 11", id: "1", count: 0),
-        Counter(title: "teste 12", id: "1", count: 5)
-    ]
+protocol CounterListViewPresenterDelegate: AnyObject {
+    func didUpdateViewModel()
 }
-extension CounterListViewPresenter: CountersListViewControllerPresenter {
-    var viewModel: CountersListView.ViewModel {
-        return .init(counters: self.counters)
+
+internal final class CounterListViewPresenter {
+    private var counters: [Counter] = [Counter]() {
+        didSet {
+            self.delegate?.didUpdateViewModel()
+        }
+    }
+    weak var delegate: CounterListViewPresenterDelegate?
+    private let service = CountersListService()
+    
+    func getViewModel() -> CounterListViewModel? {
+        return CounterListViewModel(counters: self.counters)
+    }
+    
+    func test() {
+        let counter = Counter(title: "HELLO", id: "1", count: 20)
+        self.counters.append(counter)
+    }
+    
+    func getListFromServer() {
+        self.service.getCounters { [unowned self] response in
+            switch response {
+            case .success(let counters):
+                self.counters = counters
+            case .failure(let error):
+                debugPrint(error.message)
+                break
+            }
+        }
     }
 }
+
+

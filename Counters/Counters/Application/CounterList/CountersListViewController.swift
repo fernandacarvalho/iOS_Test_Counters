@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol CountersListViewControllerPresenter {
-    var viewModel: CountersListView.ViewModel { get }
-}
 
 class CountersListViewController: BaseViewController {
 
@@ -18,12 +15,14 @@ class CountersListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter.delegate = self
     }
     
     override func loadView() {
-        self.innerView.configure(with: presenter.viewModel, andDelegate: self)
+        self.innerView.configure(with: presenter.getViewModel(), andDelegate: self)
         self.view = innerView
         self.setNavigationLeftButton(withTitle: NSLocalizedString("BTN_EDIT", comment: ""))
+        presenter.delegate = self
     }
     
     override func handleNavigationLeftBtnClick() {
@@ -37,11 +36,24 @@ class CountersListViewController: BaseViewController {
 
 extension CountersListViewController: CountersListViewDelegate {
     func didClickAddButton() {
-        
+        presenter.test()
     }
     
     func refreshList() {
         
     }
+    
+    func increaseCounter(counter: Counter) {
+        
+    }
+    
+    func decreaseCounter(counter: Counter) {
+        
+    }
 }
- 
+
+extension CountersListViewController: CounterListViewPresenterDelegate {
+    func didUpdateViewModel() {
+        self.innerView.viewModel = presenter.getViewModel()
+    }
+}
