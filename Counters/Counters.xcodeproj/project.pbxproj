@@ -24,6 +24,13 @@
 		EF15AF57267DA22C003D36BF /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF56267DA22C003D36BF /* ActivityIndicatorView.swift */; };
 		EF15AF59267DA4B9003D36BF /* GenericPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF58267DA4B9003D36BF /* GenericPlaceholderView.swift */; };
 		EF15AF5B267DA83E003D36BF /* ScreenSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF5A267DA83E003D36BF /* ScreenSizes.swift */; };
+		EF15AF5D267E927F003D36BF /* CountersSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF5C267E927F003D36BF /* CountersSearchBar.swift */; };
+		EF15AF5F267EB0E1003D36BF /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF5E267EB0E1003D36BF /* BaseView.swift */; };
+		EF15AF62267EBD86003D36BF /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF61267EBD86003D36BF /* Counter.swift */; };
+		EF15AF64267EC05B003D36BF /* CounterListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF63267EC05B003D36BF /* CounterListViewPresenter.swift */; };
+		EF15AF67267ECA45003D36BF /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF65267ECA45003D36BF /* CounterTableViewCell.swift */; };
+		EF15AF68267ECA45003D36BF /* CounterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF15AF66267ECA45003D36BF /* CounterTableViewCell.xib */; };
+		EF15AF6A267ECA80003D36BF /* CountersCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF15AF69267ECA80003D36BF /* CountersCardView.swift */; };
 		EF6D56F9267D8BEA00FC79E1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */; };
 		EF6D56FD267D990300FC79E1 /* CountersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D56FC267D990300FC79E1 /* CountersListViewController.swift */; };
 		EF6D56FF267D991A00FC79E1 /* CountersListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6D56FE267D991A00FC79E1 /* CountersListView.xib */; };
@@ -75,6 +82,13 @@
 		EF15AF56267DA22C003D36BF /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		EF15AF58267DA4B9003D36BF /* GenericPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPlaceholderView.swift; sourceTree = "<group>"; };
 		EF15AF5A267DA83E003D36BF /* ScreenSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSizes.swift; sourceTree = "<group>"; };
+		EF15AF5C267E927F003D36BF /* CountersSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersSearchBar.swift; sourceTree = "<group>"; };
+		EF15AF5E267EB0E1003D36BF /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		EF15AF61267EBD86003D36BF /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		EF15AF63267EC05B003D36BF /* CounterListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterListViewPresenter.swift; sourceTree = "<group>"; };
+		EF15AF65267ECA45003D36BF /* CounterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
+		EF15AF66267ECA45003D36BF /* CounterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterTableViewCell.xib; sourceTree = "<group>"; };
+		EF15AF69267ECA80003D36BF /* CountersCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersCardView.swift; sourceTree = "<group>"; };
 		EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		EF6D56FC267D990300FC79E1 /* CountersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersListViewController.swift; sourceTree = "<group>"; };
 		EF6D56FE267D991A00FC79E1 /* CountersListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountersListView.xib; sourceTree = "<group>"; };
@@ -147,6 +161,8 @@
 			children = (
 				DE3EBACB25E048CE00DA1E0D /* Button.swift */,
 				EF15AF58267DA4B9003D36BF /* GenericPlaceholderView.swift */,
+				EF15AF5C267E927F003D36BF /* CountersSearchBar.swift */,
+				EF15AF69267ECA80003D36BF /* CountersCardView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -203,6 +219,7 @@
 		DECA25AA25CC8FD600851431 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				EF15AF60267EBD33003D36BF /* Models */,
 				EF15AF55267DA20D003D36BF /* Utils */,
 				EF15AF52267DA1B0003D36BF /* Base */,
 				EF6D5702267D9A9200FC79E1 /* Navigation */,
@@ -265,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				EF15AF53267DA1C9003D36BF /* BaseViewController.swift */,
+				EF15AF5E267EB0E1003D36BF /* BaseView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -278,9 +296,19 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		EF15AF60267EBD33003D36BF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF15AF61267EBD86003D36BF /* Counter.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		EF6D56FA267D96E600FC79E1 /* CounterList */ = {
 			isa = PBXGroup;
 			children = (
+				EF6D56FC267D990300FC79E1 /* CountersListViewController.swift */,
+				EF15AF63267EC05B003D36BF /* CounterListViewPresenter.swift */,
 				EF6D56FB267D96F800FC79E1 /* View */,
 			);
 			path = CounterList;
@@ -289,7 +317,8 @@
 		EF6D56FB267D96F800FC79E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EF6D56FC267D990300FC79E1 /* CountersListViewController.swift */,
+				EF15AF65267ECA45003D36BF /* CounterTableViewCell.swift */,
+				EF15AF66267ECA45003D36BF /* CounterTableViewCell.xib */,
 				EF6D56FE267D991A00FC79E1 /* CountersListView.xib */,
 				EF6D5700267D993300FC79E1 /* CountersListView.swift */,
 			);
@@ -409,6 +438,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF15AF68267ECA45003D36BF /* CounterTableViewCell.xib in Resources */,
 				DECA257825CC8D4300851431 /* LaunchScreen.storyboard in Resources */,
 				DEED7FCE25CC975D00BA0CDB /* Localizable.strings in Resources */,
 				DECA257525CC8D4300851431 /* Assets.xcassets in Resources */,
@@ -437,21 +467,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF15AF62267EBD86003D36BF /* Counter.swift in Sources */,
+				EF15AF5D267E927F003D36BF /* CountersSearchBar.swift in Sources */,
 				35868D2825E03F090028AF1D /* WelcomeViewPresenter.swift in Sources */,
 				350AF6ED25E0365A0000F698 /* UIImage+Badge.swift in Sources */,
 				EF15AF59267DA4B9003D36BF /* GenericPlaceholderView.swift in Sources */,
 				EF6D56FD267D990300FC79E1 /* CountersListViewController.swift in Sources */,
 				DECA257025CC8D4200851431 /* WelcomeViewController.swift in Sources */,
 				EF6D56F9267D8BEA00FC79E1 /* UIColor+Extension.swift in Sources */,
+				EF15AF67267ECA45003D36BF /* CounterTableViewCell.swift in Sources */,
 				EF15AF54267DA1C9003D36BF /* BaseViewController.swift in Sources */,
 				EF15AF57267DA22C003D36BF /* ActivityIndicatorView.swift in Sources */,
 				DECA256C25CC8D4200851431 /* AppDelegate.swift in Sources */,
 				EF6D5704267D9B5500FC79E1 /* MainNavigationController.swift in Sources */,
+				EF15AF64267EC05B003D36BF /* CounterListViewPresenter.swift in Sources */,
 				DE3EBACC25E048CE00DA1E0D /* Button.swift in Sources */,
 				EF6D5701267D993300FC79E1 /* CountersListView.swift in Sources */,
 				EF6D5706267D9CAD00FC79E1 /* AppNavigator.swift in Sources */,
+				EF15AF6A267ECA80003D36BF /* CountersCardView.swift in Sources */,
 				35EAFB7925CC9E3B00DCFE10 /* Networking.m in Sources */,
 				350AF6D925E02D5E0000F698 /* WelcomeView.swift in Sources */,
+				EF15AF5F267EB0E1003D36BF /* BaseView.swift in Sources */,
 				350AF6E425E035840000F698 /* WelcomeFeatureView.swift in Sources */,
 				EF15AF5B267DA83E003D36BF /* ScreenSizes.swift in Sources */,
 			);

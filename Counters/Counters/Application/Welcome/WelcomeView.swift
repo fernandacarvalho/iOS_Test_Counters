@@ -6,7 +6,7 @@
 
 import UIKit
 
-protocol WelcomeViewDelegate {
+protocol WelcomeViewDelegate: AnyObject {
     func didPressContinueBtn()
 }
 
@@ -20,7 +20,7 @@ internal final class WelcomeView: UIView {
         let buttonTitle: String
     }
     
-    private var delegate: WelcomeViewDelegate?
+    private weak var delegate: WelcomeViewDelegate?
     
     // MARK: - Properties
     

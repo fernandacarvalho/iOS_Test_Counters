@@ -37,7 +37,7 @@ extension UIColor {
         static var accentColor: UIColor
     
     @Theme(light: UIColor(named: "Background") ?? UIColor(hexString: "#ECECEC"),
-               dark: UIColor(named: "Background") ?? UIColor(hexString: "#ECECEC"))
+               dark: UIColor(named: "Background") ?? UIColor(hexString: "#2B2B2B"))
         static var background: UIColor
     
     @Theme(light: UIColor(named: "ButtonText") ?? UIColor(hexString: "#FFFFFF"),
@@ -75,6 +75,10 @@ extension UIColor {
     @Theme(light: UIColor(named: "Yellow") ?? UIColor(hexString: "#FFCC00"),
                dark: UIColor(named: "Yellow") ?? UIColor(hexString: "#FFCC00"))
         static var yellow: UIColor
+    
+    @Theme(light: UIColor(named: "CardBackground") ?? UIColor(hexString: "#FFFFFF"),
+               dark: UIColor(named: "CardBackground") ?? UIColor(hexString: "#565656"))
+        static var cardBackground: UIColor
 }
 
 @propertyWrapper

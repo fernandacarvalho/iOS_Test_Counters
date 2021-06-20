@@ -20,3 +20,8 @@
 "WELCOME_COUNT_FEATURE_DESCRIPTION" = "Possibilities are literally endless.";
 
 "WELCOME_PRIMARY_ACTION_TITLE" = "Continue";
+
+//MARK: - Navigation
+"BTN_EDIT" = "Edit";
+"BTN_CANCEL" = "Cancel";
+"BTN_SAVE" = "Save";

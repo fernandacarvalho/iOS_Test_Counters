@@ -9,12 +9,44 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
-    private var placeholderView = GenericPlaceholderView()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configurePlaceholderView()
     }
+    
+    //MARK: NavigationBar
+    func setNavigationLeftButton(withTitle title: String, andImage img: UIImage? = nil) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        let leftButton = UIButton()
+        leftButton.setTitle(title, for: .normal)
+        leftButton.setTitleColor(.accentColor, for: .normal)
+        leftButton.setTitleColor(.disabledText, for: .disabled)
+        leftButton.tintColor = .accentColor
+        leftButton.addTarget(self, action: #selector(handleNavigationLeftBtnClick), for: .touchUpInside)
+        if let image = img {
+            leftButton.setImage(image, for: .normal)
+        }
+        let leftBarButton = UIBarButtonItem(customView: leftButton)
+        self.navigationItem.leftBarButtonItem = leftBarButton
+    }
+    
+    func setNavigationRightButton(withTitle title: String, andImage img: UIImage? = nil) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        let rightButton = UIButton()
+        rightButton.setTitle(title, for: .normal)
+        rightButton.setTitleColor(.accentColor, for: .normal)
+        rightButton.setTitleColor(.disabledText, for: .disabled)
+        rightButton.tintColor = .accentColor
+        rightButton.addTarget(self, action: #selector(handleNavigationRightBtnClick), for: .touchUpInside)
+        if let image = img {
+            rightButton.setImage(image, for: .normal)
+        }
+        let rightBarButton = UIBarButtonItem(customView: rightButton)
+        self.navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    @objc func handleNavigationLeftBtnClick() {}
+    
+    @objc func handleNavigationRightBtnClick() {}
     
     //MARK: Loading
     
@@ -48,28 +80,6 @@ class BaseViewController: UIViewController {
         }
         
         self.present(alert, animated: true)
-    }
-    
-    //MARK: -Placeholder
-    
-    func configurePlaceholderView() {
-        self.placeholderView.isHidden = true
-        self.placeholderView.addTarget(self, action: #selector(self.placeholderActionHandler), for: .primaryActionTriggered)
-        self.placeholderView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(self.placeholderView)
-    }
-    
-    func hidePlaceholderView() {
-        self.placeholderView.isHidden = true
-    }
-    
-    func showPlaceholderView(with title: String, subtitle: String, btnTitle: String) {
-        self.placeholderView.setInfo(with: title, subtitle: subtitle, btnTitle: btnTitle)
-        self.placeholderView.isHidden = false
-    }
-    
-    @objc func placeholderActionHandler() {
-        self.hidePlaceholderView()
     }
 }
 

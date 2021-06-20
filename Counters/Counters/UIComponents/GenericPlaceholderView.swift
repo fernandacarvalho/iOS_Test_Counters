@@ -75,17 +75,10 @@ class GenericPlaceholderView: UIControl {
     }
     
     fileprivate func setupConstraints() {
-        let guide = safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: guide.centerYAnchor),
-            stackView.widthAnchor.constraint(equalTo: guide.widthAnchor, constant: Constants.margin),
-            
-            titleLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            
-            subtitleLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            subtitleLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+        NSLayoutConstraint.activate([            
+            stackView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            stackView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, constant: -(Constants.margin))
         ])
     }
     
