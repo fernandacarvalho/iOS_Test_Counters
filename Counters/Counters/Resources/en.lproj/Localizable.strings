@@ -21,7 +21,11 @@
 
 "WELCOME_PRIMARY_ACTION_TITLE" = "Continue";
 
-//MARK: - Navigation
+//MARK: - Buttons
 "BTN_EDIT" = "Edit";
 "BTN_CANCEL" = "Cancel";
 "BTN_SAVE" = "Save";
+"BTN_RETRY" = "Retry";
+
+//MARK: - Messages
+"COULDNT_LOAD_COUNTERS" = "Couldn't load the counters";

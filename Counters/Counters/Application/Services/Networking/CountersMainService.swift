@@ -14,7 +14,7 @@ class CountersMainService: NSObject {
         
         guard let requestUrl = URL(string: url) else {return}
         let service = Networking()
-        service.getDataRequest(requestUrl) { response, error in
+        service.getDataRequest(requestUrl) { [unowned self] response, error in
             if error != nil {
                 let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
                 completionHandler(.failure(baseResponse))

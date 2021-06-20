@@ -9,6 +9,7 @@ import Foundation
 
 protocol CounterListViewPresenterDelegate: AnyObject {
     func didUpdateViewModel()
+    func getCountersError(baseResponse: BaseResponse)
 }
 
 internal final class CounterListViewPresenter {
@@ -35,7 +36,7 @@ internal final class CounterListViewPresenter {
             case .success(let counters):
                 self.counters = counters
             case .failure(let error):
-                debugPrint(error.message)
+                self.delegate?.getCountersError(baseResponse: error)
                 break
             }
         }

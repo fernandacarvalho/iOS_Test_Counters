@@ -23,6 +23,7 @@ class CountersListViewController: BaseViewController {
         self.view = innerView
         self.setNavigationLeftButton(withTitle: NSLocalizedString("BTN_EDIT", comment: ""))
         presenter.delegate = self
+        presenter.getListFromServer()
     }
     
     override func handleNavigationLeftBtnClick() {
@@ -40,7 +41,7 @@ extension CountersListViewController: CountersListViewDelegate {
     }
     
     func refreshList() {
-        
+        presenter.getListFromServer()
     }
     
     func increaseCounter(counter: Counter) {
@@ -54,6 +55,15 @@ extension CountersListViewController: CountersListViewDelegate {
 
 extension CountersListViewController: CounterListViewPresenterDelegate {
     func didUpdateViewModel() {
-        self.innerView.viewModel = presenter.getViewModel()
+        DispatchQueue.main.async {
+            self.innerView.viewModel = self.presenter.getViewModel()
+        }
+    }
+    
+    func getCountersError(baseResponse: BaseResponse) {
+        baseResponse.title = NSLocalizedString("COULDNT_LOAD_COUNTERS", comment: "")
+        DispatchQueue.main.async {
+            self.innerView.setErrorView(error: baseResponse, errorType: .countersNotGet)
+        }
     }
 }

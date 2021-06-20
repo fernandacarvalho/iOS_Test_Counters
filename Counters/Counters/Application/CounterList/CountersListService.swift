@@ -8,6 +8,7 @@
 import Foundation
 
 class CountersListService: CountersMainService {
+    
     func getCounters(completionHandler: @escaping (RequestResultType<[Counter]>) -> Void) {
         let url = UtilUrlFactory.CountersList.countersUrl()
         self.getDataFromServer(url: url) { [unowned self] response in

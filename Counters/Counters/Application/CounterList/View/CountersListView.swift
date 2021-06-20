@@ -19,6 +19,12 @@ private enum CellReuseIdentifier: String {
     case counter = "counterCell"
 }
 
+enum CounterListViewErrorType {
+    case countersNotGet
+    case counterNotCreated
+    case counterNotDeleted
+}
+
 class CountersListView: BaseView {
     
     // MARK: - View Model
@@ -36,6 +42,8 @@ class CountersListView: BaseView {
             self.tableView.reloadData()
         }
     }
+    
+    private var viewErrorType: CounterListViewErrorType?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,7 +76,27 @@ class CountersListView: BaseView {
     //MARK: - Placeholder
     override func placeholderActionHandler() {
         super.placeholderActionHandler()
-        self.delegate?.didClickAddButton()
+        
+        if let error = viewErrorType {
+            switch error {
+            case .countersNotGet:
+                self.delegate?.refreshList()
+            case .counterNotCreated, .counterNotDeleted:
+                break
+            }
+        } else {
+            self.delegate?.didClickAddButton()
+        }
+    }
+    
+    func setErrorView(error: BaseResponse, errorType: CounterListViewErrorType) {
+        viewErrorType = errorType
+        switch errorType {
+        case .countersNotGet:
+            self.setPlaceholderView(withTitle: error.title, subtitle: error.message, btnTitle: NSLocalizedString("BTN_RETRY", comment: ""))
+        case .counterNotCreated, .counterNotDeleted:
+            break
+        }
     }
     
     // MARK: - Configuration
@@ -90,7 +118,7 @@ class CountersListView: BaseView {
         self.tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.counter.rawValue)
     }
     
-    func checkEmptyList() {
+    private func checkEmptyList() {
         if let count = self.viewModel?.counters?.count, count > 0 {
             self.placeholderContainerView.isHidden = true
         } else {

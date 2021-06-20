@@ -7,10 +7,13 @@
 
 import Foundation
 
+
+
 class CounterListViewModel: NSObject {
     var counters: [Counter]?
     
     init(counters: [Counter]){
         self.counters = counters
     }
+    
 }
