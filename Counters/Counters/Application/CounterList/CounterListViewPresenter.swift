@@ -16,10 +16,15 @@ public enum CounterListPlaceholderAction {
 protocol CounterListViewPresenterDelegate: AnyObject {
     func refreshList()
     func createCounter()
-    func getCountersSuccess()
-    func getCountersError(baseResponse: BaseResponse)
     func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String)
     func hidePlaceholder()
+    func showAlert(withTitle title: String, andMessage message: String)
+    func getCountersSuccess()
+    func getCountersError()
+    func increaseCounterSuccess()
+    func increaseCounterError()
+    func decreaseCounterSuccess()
+    func decreaseCounterError()
 }
 
 final class CounterListViewPresenter {
@@ -43,9 +48,8 @@ final class CounterListViewPresenter {
                 selfObj.delegate?.getCountersSuccess()
                 selfObj.checkEmptyCountersList()
             case .failure(let error):
-                selfObj.delegate?.getCountersError(baseResponse: error)
+                selfObj.delegate?.getCountersError()
                 selfObj.showRetryPlaceholder(error: error)
-                break
             }
         }
     }
@@ -58,6 +62,42 @@ final class CounterListViewPresenter {
             self.delegate?.createCounter()
         default:
             break
+        }
+    }
+    
+    func decreaseBtnClicked(counter: Counter) {
+        guard let id = counter.id else {
+            self.delegate?.decreaseCounterError()
+            return
+        }
+        self.service.decreaseCounter(counterId: "\(id)") { [weak self] response in
+            guard let selfObj = self else { return }
+            switch response {
+            case .success(let counters):
+                selfObj.counters = counters
+                selfObj.delegate?.decreaseCounterSuccess()
+            case .failure(let error):
+                selfObj.delegate?.decreaseCounterError()
+                selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
+            }
+        }
+    }
+    
+    func increaseBtnClicked(counter: Counter) {
+        guard let id = counter.id else {
+            self.delegate?.increaseCounterError()
+            return
+        }
+        self.service.increaseCounter(counterId: "\(id)") { [weak self] response in
+            guard let selfObj = self else { return }
+            switch response {
+            case .success(let counters):
+                selfObj.counters = counters
+                selfObj.delegate?.increaseCounterSuccess()
+            case .failure(let error):
+                selfObj.delegate?.increaseCounterError()
+                selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
+            }
         }
     }
 }

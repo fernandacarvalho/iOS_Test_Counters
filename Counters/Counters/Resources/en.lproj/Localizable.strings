@@ -32,3 +32,4 @@
 "COULDNT_LOAD_COUNTERS" = "Couldn't load the counters";
 "NO_COUNTERS" = "No counters yet";
 "ERROR" = "Error";
+"COULDNT_UPDATE_COUNTER" = "Couldn't update counter";

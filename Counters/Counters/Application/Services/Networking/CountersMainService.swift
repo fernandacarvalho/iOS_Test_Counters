@@ -14,7 +14,8 @@ class CountersMainService: NSObject {
         
         guard let requestUrl = URL(string: url) else {return}
         let service = Networking()
-        service.getDataRequest(requestUrl) { [unowned self] response, error in
+        
+        service.dataRequest(requestUrl, httpMethod: "GET", parameters: nil) { response, error in
             DispatchQueue.main.async {
                 if error != nil {
                     let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
@@ -37,19 +38,21 @@ class CountersMainService: NSObject {
         
         guard let requestUrl = URL(string: url) else {return}
         let service = Networking()
-        service.dataRequest(requestUrl, httpMethod: "POST", parameters: parameters) { response, error in
-            if error != nil {
-                let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
-                completionHandler(.failure(baseResponse))
-                return
+        service.dataRequest(requestUrl, httpMethod: "POST", parameters: parameters) { [unowned self] response, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
+                    completionHandler(.failure(baseResponse))
+                    return
+                }
+                
+                guard let data = response as? Data else {
+                    let baseResponse = self.getBaseResponseError(title: "Error", message: error?.localizedDescription ?? "Please, try again.")
+                    completionHandler(.failure(baseResponse))
+                    return
+                }
+                completionHandler(.success(data))
             }
-            
-            guard let data = response as? Data else {
-                let baseResponse = self.getBaseResponseError(title: "Error", message: error?.localizedDescription ?? "Please, try again.")
-                completionHandler(.failure(baseResponse))
-                return
-            }
-            completionHandler(.success(data))
         }.resume()
     }
     

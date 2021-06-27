@@ -7,14 +7,8 @@
 
 import Foundation
 
-class Counter: NSObject, Codable {
+struct Counter: Codable {
     var title: String?
     var id: String?
     var count: Int?
-    
-    init(title: String, id: String, count: Int) {
-        self.title = title
-        self.id = id
-        self.count = count
-    }
 }

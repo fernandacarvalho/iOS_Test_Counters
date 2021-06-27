@@ -28,24 +28,6 @@ NSString * const JSONContentType = @"application/json";
     return self;
 }
 
-- (NSURLSessionTask *)getDataRequestURL:(NSURL *)url
-                   completionHandler:(DataCompletionHandler)completion
-{
-    __auto_type *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:JSONContentType forHTTPHeaderField:ContentType];
-
-    return [self.client dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            completion(data, error);
-        } else if (!data) {
-            completion(nil, [self error:CountersErrorCodeNoData]);
-        } else {
-            completion(data, nil);
-        }
-    }];
-}
-
 - (NSURLSessionTask *)jsonRequestURL:(NSURL *)url
                           HTTPMethod:(NSString *)method
                           parameters:(NSDictionary<NSString*, NSString*>*)parameters
@@ -68,17 +50,20 @@ NSString * const JSONContentType = @"application/json";
 
 - (NSURLSessionTask *)dataRequestURL:(NSURL *)url
                       HTTPMethod:(NSString *)method
-                      parameters:(NSDictionary<NSString*, NSString*>*)parameters
+                      parameters:(NSDictionary<NSString*, NSString*>* _Nullable)parameters
                completionHandler:(DataCompletionHandler)completion
 {
     __auto_type *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = method;
     
-    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-    if (JSONData) {
-        request.HTTPBody = JSONData;
-        [request setValue:JSONContentType forHTTPHeaderField:ContentType];
+    if (parameters != nil) {
+        NSData *JSONData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+        if (JSONData) {
+            request.HTTPBody = JSONData;
+            [request setValue:JSONContentType forHTTPHeaderField:ContentType];
+        }
     }
+    
     return [self.client dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             completion(data, error);

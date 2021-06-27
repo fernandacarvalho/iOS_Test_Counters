@@ -24,11 +24,8 @@ typedef NS_ENUM(NSInteger, CountersErrorCode) {
 
 - (NSURLSessionTask *)dataRequestURL:(NSURL *)url
                       HTTPMethod:(NSString *)method
-                      parameters:(NSDictionary<NSString*, NSString*>*)parameters
+                      parameters:(NSDictionary<NSString*, NSString*>* _Nullable)parameters
                    completionHandler:(DataCompletionHandler)completion;
-
-- (NSURLSessionTask *)getDataRequestURL:(NSURL *)url
-                  completionHandler:(DataCompletionHandler)completion;
 
 @end
 

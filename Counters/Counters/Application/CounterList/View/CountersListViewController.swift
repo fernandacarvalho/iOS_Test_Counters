@@ -77,6 +77,7 @@ class CountersListViewController: BaseViewController {
     }
     
     private func getList() {
+        self.showActivityIndicator()
         self.presenter.getListFromServer()
     }
 }
@@ -98,15 +99,40 @@ extension CountersListViewController: UITableViewDelegate, UITableViewDataSource
 
 extension CountersListViewController: CounterTableViewCellDelegate {
     func didClickDecreaseBtn(counter: Counter) {
-        
+        self.showActivityIndicator()
+        self.presenter.decreaseBtnClicked(counter: counter)
     }
     
     func didClickIncreaseBtn(counter: Counter) {
-        
+        self.showActivityIndicator()
+        self.presenter.increaseBtnClicked(counter: counter)
     }
 }
 
 extension CountersListViewController: CounterListViewPresenterDelegate {
+    
+    func showAlert(withTitle title: String, andMessage message: String) {
+        self.showSimpleAlert(withTitle: title, andMessage: message)
+    }
+    
+    func decreaseCounterSuccess() {
+        self.removeActivityIndicator()
+        self.tableView.reloadData()
+    }
+    
+    func decreaseCounterError() {
+        self.removeActivityIndicator()
+    }
+    
+    func increaseCounterSuccess() {
+        self.removeActivityIndicator()
+        self.tableView.reloadData()
+    }
+    
+    func increaseCounterError() {
+        self.removeActivityIndicator()
+    }
+    
     func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String) {
         self.placeholderContainerView.isHidden = false
         self.setPlaceholderView(withTitle: title, subtitle: subtitle, btnTitle: btnTitle)
@@ -117,12 +143,12 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     }
     
     func getCountersSuccess() {
-        //TODO: STOP LOADING
+        self.removeActivityIndicator()
         self.tableView.reloadData()
     }
     
-    func getCountersError(baseResponse: BaseResponse) {
-        //TODO: STOP LOADING
+    func getCountersError() {
+        self.removeActivityIndicator()
     }
     
     func refreshList() {
