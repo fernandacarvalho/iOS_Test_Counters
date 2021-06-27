@@ -26,6 +26,9 @@
 "BTN_CANCEL" = "Cancel";
 "BTN_SAVE" = "Save";
 "BTN_RETRY" = "Retry";
+"BTN_CREATE_COUNTER" = "Create a counter";
 
 //MARK: - Messages
 "COULDNT_LOAD_COUNTERS" = "Couldn't load the counters";
+"NO_COUNTERS" = "No counters yet";
+"ERROR" = "Error";

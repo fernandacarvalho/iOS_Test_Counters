@@ -15,17 +15,19 @@ class CountersMainService: NSObject {
         guard let requestUrl = URL(string: url) else {return}
         let service = Networking()
         service.getDataRequest(requestUrl) { [unowned self] response, error in
-            if error != nil {
-                let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
-                completionHandler(.failure(baseResponse))
-                return
+            DispatchQueue.main.async {
+                if error != nil {
+                    let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
+                    completionHandler(.failure(baseResponse))
+                    return
+                }
+                guard let data = response as? Data else {
+                    let baseResponse = self.getBaseResponseError(title: "Error", message: error?.localizedDescription ?? "Please, try again.")
+                    completionHandler(.failure(baseResponse))
+                    return
+                }
+                completionHandler(.success(data))
             }
-            guard let data = response as? Data else {
-                let baseResponse = self.getBaseResponseError(title: "Error", message: error?.localizedDescription ?? "Please, try again.")
-                completionHandler(.failure(baseResponse))
-                return
-            }
-            completionHandler(.success(data))
         }.resume()
     }
     
@@ -52,6 +54,6 @@ class CountersMainService: NSObject {
     }
     
     func getBaseResponseError(title: String, message: String) -> BaseResponse {
-        return BaseResponse(title: "Error", message: message)
+        return BaseResponse(title: NSLocalizedString("ERROR", comment: ""), message: message)
     }
 }

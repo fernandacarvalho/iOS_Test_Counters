@@ -7,40 +7,81 @@
 
 import Foundation
 
-protocol CounterListViewPresenterDelegate: AnyObject {
-    func didUpdateViewModel()
-    func getCountersError(baseResponse: BaseResponse)
+public enum CounterListPlaceholderAction {
+    case createCounter
+    case getCounters
+    case none
 }
 
-internal final class CounterListViewPresenter {
-    private var counters: [Counter] = [Counter]() {
-        didSet {
-            self.delegate?.didUpdateViewModel()
-        }
-    }
+protocol CounterListViewPresenterDelegate: AnyObject {
+    func refreshList()
+    func createCounter()
+    func getCountersSuccess()
+    func getCountersError(baseResponse: BaseResponse)
+    func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String)
+    func hidePlaceholder()
+}
+
+final class CounterListViewPresenter {
+    
+    private(set) var counters: [Counter] = [Counter]()
     weak var delegate: CounterListViewPresenterDelegate?
-    private let service = CountersListService()
+    private let service: CountersListService
+    private var placeholderAction: CounterListPlaceholderAction = .none
     
-    func getViewModel() -> CounterListViewModel? {
-        return CounterListViewModel(counters: self.counters)
-    }
-    
-    func test() {
-        let counter = Counter(title: "HELLO", id: "1", count: 20)
-        self.counters.append(counter)
+    init(delegate: CounterListViewPresenterDelegate, service: CountersListService = CountersListService()) {
+        self.delegate = delegate
+        self.service = service
     }
     
     func getListFromServer() {
-        self.service.getCounters { [unowned self] response in
+        self.service.getCounters { [weak self] response in
+            guard let selfObj = self else { return }
             switch response {
             case .success(let counters):
-                self.counters = counters
+                selfObj.counters = counters
+                selfObj.delegate?.getCountersSuccess()
+                selfObj.checkEmptyCountersList()
             case .failure(let error):
-                self.delegate?.getCountersError(baseResponse: error)
+                selfObj.delegate?.getCountersError(baseResponse: error)
+                selfObj.showRetryPlaceholder(error: error)
                 break
             }
         }
     }
+    
+    func placeholderButtonClicked() {
+        switch self.placeholderAction {
+        case .getCounters:
+            self.delegate?.refreshList()
+        case .createCounter:
+            self.delegate?.createCounter()
+        default:
+            break
+        }
+    }
 }
 
-
+private extension CounterListViewPresenter {
+    func checkEmptyCountersList() {
+        if self.counters.count == 0 {
+            self.showNoCountersPlaceholder()
+        }
+    }
+    
+    func showNoCountersPlaceholder() {
+        self.placeholderAction = .createCounter
+        self.delegate?.showPlaceholder(
+            withTitle: NSLocalizedString("NO_COUNTERS", comment: ""),
+            subtitle: "",
+            btnTitle: NSLocalizedString("BTN_CREATE_COUNTER", comment: ""))
+    }
+    
+    func showRetryPlaceholder(error: BaseResponse) {
+        self.placeholderAction = .getCounters
+        self.delegate?.showPlaceholder(
+            withTitle: error.title,
+            subtitle: error.message,
+            btnTitle:  NSLocalizedString("RETRY", comment: ""))
+    }
+}
