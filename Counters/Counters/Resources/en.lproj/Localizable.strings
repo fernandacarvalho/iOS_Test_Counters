@@ -31,5 +31,7 @@
 //MARK: - Messages
 "COULDNT_LOAD_COUNTERS" = "Couldn't load the counters";
 "NO_COUNTERS" = "No counters yet";
+"NO_COUNTERS_DESCRIPTION" = "\"When I started counting my blessings, my whole life turned around.\" \n-Willie Nelson";
 "ERROR" = "Error";
 "COULDNT_UPDATE_COUNTER" = "Couldn't update counter";
+"SEE_EXAMPLES" = "Give it a name. Creative block? See examples.";

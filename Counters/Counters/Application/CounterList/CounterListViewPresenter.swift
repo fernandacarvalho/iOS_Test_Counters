@@ -15,16 +15,13 @@ public enum CounterListPlaceholderAction {
 
 protocol CounterListViewPresenterDelegate: AnyObject {
     func refreshList()
-    func createCounter()
+    func goToCreateCounter()
     func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String)
-    func hidePlaceholder()
     func showAlert(withTitle title: String, andMessage message: String)
+    func stopLoading()
     func getCountersSuccess()
-    func getCountersError()
     func increaseCounterSuccess()
-    func increaseCounterError()
     func decreaseCounterSuccess()
-    func decreaseCounterError()
 }
 
 final class CounterListViewPresenter {
@@ -48,7 +45,7 @@ final class CounterListViewPresenter {
                 selfObj.delegate?.getCountersSuccess()
                 selfObj.checkEmptyCountersList()
             case .failure(let error):
-                selfObj.delegate?.getCountersError()
+                selfObj.delegate?.stopLoading()
                 selfObj.showRetryPlaceholder(error: error)
             }
         }
@@ -59,7 +56,7 @@ final class CounterListViewPresenter {
         case .getCounters:
             self.delegate?.refreshList()
         case .createCounter:
-            self.delegate?.createCounter()
+            self.delegate?.goToCreateCounter()
         default:
             break
         }
@@ -67,7 +64,7 @@ final class CounterListViewPresenter {
     
     func decreaseBtnClicked(counter: Counter) {
         guard let id = counter.id else {
-            self.delegate?.decreaseCounterError()
+            self.delegate?.stopLoading()
             return
         }
         self.service.decreaseCounter(counterId: "\(id)") { [weak self] response in
@@ -77,7 +74,7 @@ final class CounterListViewPresenter {
                 selfObj.counters = counters
                 selfObj.delegate?.decreaseCounterSuccess()
             case .failure(let error):
-                selfObj.delegate?.decreaseCounterError()
+                selfObj.delegate?.stopLoading()
                 selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
             }
         }
@@ -85,7 +82,7 @@ final class CounterListViewPresenter {
     
     func increaseBtnClicked(counter: Counter) {
         guard let id = counter.id else {
-            self.delegate?.increaseCounterError()
+            self.delegate?.stopLoading()
             return
         }
         self.service.increaseCounter(counterId: "\(id)") { [weak self] response in
@@ -95,7 +92,7 @@ final class CounterListViewPresenter {
                 selfObj.counters = counters
                 selfObj.delegate?.increaseCounterSuccess()
             case .failure(let error):
-                selfObj.delegate?.increaseCounterError()
+                selfObj.delegate?.stopLoading()
                 selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
             }
         }
@@ -113,7 +110,7 @@ private extension CounterListViewPresenter {
         self.placeholderAction = .createCounter
         self.delegate?.showPlaceholder(
             withTitle: NSLocalizedString("NO_COUNTERS", comment: ""),
-            subtitle: "",
+            subtitle: NSLocalizedString("NO_COUNTERS_DESCRIPTION", comment: ""),
             btnTitle: NSLocalizedString("BTN_CREATE_COUNTER", comment: ""))
     }
     

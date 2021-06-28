@@ -20,9 +20,10 @@ class GenericPlaceholderView: UIControl {
         
         self.setup()
     }
-    
+        
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        self.setup()
     }
     
     // MARK: - Setups
@@ -58,7 +59,7 @@ class GenericPlaceholderView: UIControl {
         subtitleLabel.numberOfLines = 0
         subtitleLabel.lineBreakMode = .byWordWrapping
         subtitleLabel.textAlignment = .center
-        subtitleLabel.textColor = UIColor.subtitleText
+        subtitleLabel.textColor = UIColor.secondaryText
     }
     
     fileprivate func setupButton() {
@@ -93,7 +94,7 @@ class GenericPlaceholderView: UIControl {
 private extension GenericPlaceholderView {
     enum Constants {
         static let spacing: CGFloat = 24
-        static let margin: CGFloat = 15
+        static let margin: CGFloat = 50
         static let buttonHeight: CGFloat = 57
     }
     

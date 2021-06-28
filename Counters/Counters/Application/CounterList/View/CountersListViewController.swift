@@ -16,7 +16,8 @@ class CountersListViewController: BaseViewController {
     //MARK: IBOUTLETS
     @IBOutlet weak var searchBar: CountersSearchBar!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var placeholderContainerView: UIView!
+    @IBOutlet weak var placeholderView: GenericPlaceholderView!
+    
     
     private var presenter: CounterListViewPresenter!
     
@@ -25,7 +26,7 @@ class CountersListViewController: BaseViewController {
         self.presenter = CounterListViewPresenter(delegate: self)
         self.setupTableView()
         self.setupNavigation()
-        self.configurePlaceholderView(parentView: self.placeholderContainerView)
+        self.configurePlaceholderView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,18 +34,22 @@ class CountersListViewController: BaseViewController {
         self.getList()
     }
     
-    override func configurePlaceholderView(parentView: UIView) {
-        super.configurePlaceholderView(parentView: parentView)
-        NSLayoutConstraint.activate([
-            placeholderView.leadingAnchor.constraint(equalTo: placeholderContainerView.leadingAnchor),
-            placeholderView.trailingAnchor.constraint(equalTo: placeholderContainerView.trailingAnchor),
-            placeholderView.topAnchor.constraint(equalTo: placeholderContainerView.topAnchor),
-            placeholderView.bottomAnchor.constraint(equalTo: placeholderContainerView.bottomAnchor)
-        ])
+    //MARK: -Placeholder
+    
+    func configurePlaceholderView() {
+        self.placeholderView.addTarget(self, action: #selector(self.placeholderActionHandler), for: .primaryActionTriggered)
     }
     
-    override func placeholderActionHandler() {
-        super.placeholderActionHandler()
+    private func showPlaceholderView() {
+        self.placeholderView.isHidden = false
+    }
+    
+    private func hidePlaceholderView() {
+        self.placeholderView.isHidden = true
+    }
+    
+    @objc func placeholderActionHandler() {
+        self.hidePlaceholderView()
         self.presenter.placeholderButtonClicked()
     }
     
@@ -115,39 +120,12 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
         self.showSimpleAlert(withTitle: title, andMessage: message)
     }
     
-    func decreaseCounterSuccess() {
-        self.removeActivityIndicator()
-        self.tableView.reloadData()
-    }
-    
-    func decreaseCounterError() {
-        self.removeActivityIndicator()
-    }
-    
-    func increaseCounterSuccess() {
-        self.removeActivityIndicator()
-        self.tableView.reloadData()
-    }
-    
-    func increaseCounterError() {
-        self.removeActivityIndicator()
-    }
-    
     func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String) {
-        self.placeholderContainerView.isHidden = false
-        self.setPlaceholderView(withTitle: title, subtitle: subtitle, btnTitle: btnTitle)
+        self.placeholderView.setInfo(with: title, subtitle: subtitle, btnTitle: btnTitle)
+        self.showPlaceholderView()
     }
     
-    func hidePlaceholder() {
-        self.placeholderContainerView.isHidden = true
-    }
-    
-    func getCountersSuccess() {
-        self.removeActivityIndicator()
-        self.tableView.reloadData()
-    }
-    
-    func getCountersError() {
+    func stopLoading() {
         self.removeActivityIndicator()
     }
     
@@ -155,7 +133,23 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
         self.getList()
     }
     
-    func createCounter() {
-        //TODO: OPEN VC
+    func decreaseCounterSuccess() {
+        self.removeActivityIndicator()
+        self.tableView.reloadData()
+    }
+    
+    func increaseCounterSuccess() {
+        self.removeActivityIndicator()
+        self.tableView.reloadData()
+    }
+    
+    func getCountersSuccess() {
+        self.removeActivityIndicator()
+        self.tableView.reloadData()
+    }
+    
+    func goToCreateCounter() {
+        let controller = CreateCounterViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
