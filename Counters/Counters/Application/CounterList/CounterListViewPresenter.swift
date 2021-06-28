@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public enum CounterListPlaceholderAction {
     case createCounter
@@ -22,12 +23,24 @@ protocol CounterListViewPresenterDelegate: AnyObject {
     func getCountersSuccess()
     func increaseCounterSuccess()
     func decreaseCounterSuccess()
+    func updateBottomViewWith(leftButtonEnabled: Bool, rightButtonIcon: UIImage, totalItems: String, totalCounts: String)
+    func updateNavigationBar()
 }
 
 final class CounterListViewPresenter {
     
+    private(set) var isEditionMode: Bool = false {
+        didSet {
+            self.updateCounts()
+        }
+    }
+    private(set) var isEditionAvailable: Bool = false {
+        didSet {
+            self.delegate?.updateNavigationBar()
+        }
+    }
     private(set) var counters: [Counter] = [Counter]()
-    weak var delegate: CounterListViewPresenterDelegate?
+    private weak var delegate: CounterListViewPresenterDelegate?
     private let service: CountersListService
     private var placeholderAction: CounterListPlaceholderAction = .none
     
@@ -44,9 +57,11 @@ final class CounterListViewPresenter {
                 selfObj.counters = counters
                 selfObj.delegate?.getCountersSuccess()
                 selfObj.checkEmptyCountersList()
+                selfObj.updateCounts()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
                 selfObj.showRetryPlaceholder(error: error)
+                selfObj.updateCounts()
             }
         }
     }
@@ -97,12 +112,36 @@ final class CounterListViewPresenter {
             }
         }
     }
+    
+    func bottomViewLeftButtonClicked() {
+        //TODO: delete
+    }
+    
+    func bottomViewRightButtonClicked() {
+        if isEditionMode {
+            //TODO: share
+        } else {
+            self.delegate?.goToCreateCounter()
+        }
+    }
+    
+    func navigationLeftButtonClicked() {
+        isEditionMode = !isEditionMode
+    }
+    
+    func navigationRightButtonClicked() {
+        //TODO: select all
+    }
+    
 }
 
 private extension CounterListViewPresenter {
     func checkEmptyCountersList() {
         if self.counters.count == 0 {
+            self.isEditionAvailable = false
             self.showNoCountersPlaceholder()
+        } else {
+            self.isEditionAvailable = true
         }
     }
     
@@ -120,5 +159,51 @@ private extension CounterListViewPresenter {
             withTitle: error.title,
             subtitle: error.message,
             btnTitle:  NSLocalizedString("RETRY", comment: ""))
+    }
+    
+    func updateCounts() {
+        if isEditionMode {
+            setViewEditionMode()
+        } else {
+            dismissViewEditionMode()
+        }
+    }
+    
+    func setViewEditionMode(){
+        guard let image = UIImage(systemName: "square.and.arrow.up") else {return}
+        self.delegate?.updateBottomViewWith(
+            leftButtonEnabled: true,
+            rightButtonIcon: image,
+            totalItems: "",
+            totalCounts: "")
+        self.delegate?.updateNavigationBar()
+    }
+    
+    func dismissViewEditionMode() {
+        guard let image = UIImage(systemName: "plus") else {return}
+        let totalItems = getNumberOfCountersDescription()
+        let totalCounts = getCountedDescription()
+        self.delegate?.updateBottomViewWith(
+            leftButtonEnabled: false,
+            rightButtonIcon: image,
+            totalItems: totalItems,
+            totalCounts: totalCounts)
+        self.delegate?.updateNavigationBar()
+    }
+    
+    func getNumberOfCountersDescription() -> String {
+        guard self.counters.count != 0 else {return ""}
+        return "\(self.counters.count) items • "
+    }
+    
+    func getCountedDescription() -> String {
+        guard self.counters.count != 0 else {return ""}
+        var totalCount = 0
+        for counter in counters {
+            if let count = counter.count {
+                totalCount += count
+            }
+        }
+        return totalCount != 0 ? "Counted \(totalCount) times" : ""
     }
 }

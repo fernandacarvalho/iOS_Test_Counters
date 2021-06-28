@@ -23,6 +23,8 @@
 
 //MARK: - Buttons
 "BTN_EDIT" = "Edit";
+"BTN_DONE" = "Done";
+"BTN_SELECT_ALL" = "Select All";
 "BTN_CANCEL" = "Cancel";
 "BTN_SAVE" = "Save";
 "BTN_RETRY" = "Retry";

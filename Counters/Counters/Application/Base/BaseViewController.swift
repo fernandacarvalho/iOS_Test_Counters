@@ -44,6 +44,14 @@ class BaseViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
+    func updateNavigationLeftBarButtonState(enabled: Bool) {
+        self.navigationItem.leftBarButtonItem?.isEnabled = enabled
+    }
+    
+    func updateNavigationRightBarButtonState(enabled: Bool) {
+        self.navigationItem.rightBarButtonItem?.isEnabled = enabled
+    }
+    
     @objc func handleNavigationLeftBtnClick() {}
     
     @objc func handleNavigationRightBtnClick() {}

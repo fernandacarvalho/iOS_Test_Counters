@@ -17,7 +17,10 @@ class CountersListViewController: BaseViewController {
     @IBOutlet weak var searchBar: CountersSearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var placeholderView: GenericPlaceholderView!
-    
+    @IBOutlet weak var numberOfCountersLabel: UILabel!
+    @IBOutlet weak var totalCountsLabel: UILabel!
+    @IBOutlet weak var bottomLeftButton: UIButton!
+    @IBOutlet weak var bottomRightButton: UIButton!
     
     private var presenter: CounterListViewPresenter!
     
@@ -53,6 +56,8 @@ class CountersListViewController: BaseViewController {
         self.presenter.placeholderButtonClicked()
     }
     
+    //MARK: -Setups
+    
     private func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -62,18 +67,6 @@ class CountersListViewController: BaseViewController {
         self.tableView.register(UINib(nibName: CounterTableViewCell.self.description(), bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.counter.rawValue)
     }
     
-    private func setupNavigation() {
-        self.setNavigationLeftButton(withTitle: NSLocalizedString("BTN_EDIT", comment: ""))
-    }
-    
-    override func handleNavigationLeftBtnClick() {
-        print("nav left btn clicked")
-    }
-    
-    override func handleNavigationRightBtnClick() {
-        print("nav right btn clicked")
-    }
-    
     @objc func refreshValueChanged() {
         self.getList()
         DispatchQueue.main.async {
@@ -81,10 +74,49 @@ class CountersListViewController: BaseViewController {
         }
     }
     
+    private func setupNavigation() {
+        if self.presenter.isEditionMode {
+            self.setNavigationLeftButton(withTitle: NSLocalizedString("BTN_DONE", comment: ""))
+            self.setNavigationRightButton(withTitle: NSLocalizedString("BTN_SELECT_ALL", comment: ""))
+        } else {
+            self.setNavigationLeftButton(withTitle: NSLocalizedString("BTN_EDIT", comment: ""))
+            self.navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    private func updateNavigationState() {
+        if self.presenter.isEditionAvailable {
+            self.updateNavigationLeftBarButtonState(enabled: true)
+            self.updateNavigationRightBarButtonState(enabled: self.presenter.isEditionMode ? true : false)
+        } else {
+            self.updateNavigationLeftBarButtonState(enabled: false)
+            self.updateNavigationRightBarButtonState(enabled: false)
+        }
+    }
+    
     private func getList() {
         self.showActivityIndicator()
         self.presenter.getListFromServer()
     }
+    
+    //MARK: -Actions
+    
+    @IBAction func bottomLeftBtnClicked(_ sender: Any) {
+        self.presenter.bottomViewLeftButtonClicked()
+    }
+    
+    @IBAction func bottomRightBtnClicked(_ sender: Any) {
+        self.presenter.bottomViewRightButtonClicked()
+    }
+    
+    override func handleNavigationLeftBtnClick() {
+        self.presenter.navigationLeftButtonClicked()
+    }
+    
+    override func handleNavigationRightBtnClick() {
+        self.presenter.navigationRightButtonClicked()
+    }
+    
 }
 
 //MARK: TABLEVIEW DELEGATE AND DATA SOURCE
@@ -146,10 +178,23 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     func getCountersSuccess() {
         self.removeActivityIndicator()
         self.tableView.reloadData()
+        self.updateNavigationState()
     }
     
     func goToCreateCounter() {
         let controller = CreateCounterViewController()
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func updateBottomViewWith(leftButtonEnabled: Bool, rightButtonIcon: UIImage, totalItems: String, totalCounts: String) {
+        self.bottomLeftButton.isHidden = !leftButtonEnabled
+        self.bottomRightButton.setImage(rightButtonIcon, for: .normal)
+        self.numberOfCountersLabel.text = totalItems
+        self.totalCountsLabel.text = totalCounts
+    }
+    
+    func updateNavigationBar() {
+        self.setupNavigation()
+        self.updateNavigationState()
     }
 }
