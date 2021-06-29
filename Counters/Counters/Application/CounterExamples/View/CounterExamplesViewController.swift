@@ -7,6 +7,10 @@
 
 import UIKit
 
+private enum CellReuseIdentifiers: String {
+    case exampleCell = "exampleCell"
+}
+
 class CounterExamplesViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -27,6 +31,7 @@ class CounterExamplesViewController: BaseViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "CounterExampleTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifiers.exampleCell.rawValue)
     }
 }
 
@@ -40,6 +45,9 @@ extension CounterExamplesViewController: UITableViewDelegate, UITableViewDataSou
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifiers.exampleCell.rawValue, for: indexPath) as? CounterExampleTableViewCell else {
+            return UITableViewCell()
+        }
+        return cell
     }
 }

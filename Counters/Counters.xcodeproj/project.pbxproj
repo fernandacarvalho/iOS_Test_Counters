@@ -48,6 +48,10 @@
 		EF75E2D6268BACBB000F0F51 /* SuccessAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D5268BACBB000F0F51 /* SuccessAnimation.swift */; };
 		EF75E2DA268BC06C000F0F51 /* CounterExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D9268BC06C000F0F51 /* CounterExamplesViewController.swift */; };
 		EF75E2DC268BC15D000F0F51 /* CounterExamplesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2DB268BC15D000F0F51 /* CounterExamplesView.xib */; };
+		EF75E2E0268BC7EF000F0F51 /* CounterExampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2DE268BC7EF000F0F51 /* CounterExampleTableViewCell.swift */; };
+		EF75E2E1268BC7EF000F0F51 /* CounterExampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2DF268BC7EF000F0F51 /* CounterExampleTableViewCell.xib */; };
+		EF75E2E4268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2E2268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift */; };
+		EF75E2E5268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2E3268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +121,10 @@
 		EF75E2D5268BACBB000F0F51 /* SuccessAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAnimation.swift; sourceTree = "<group>"; };
 		EF75E2D9268BC06C000F0F51 /* CounterExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterExamplesViewController.swift; sourceTree = "<group>"; };
 		EF75E2DB268BC15D000F0F51 /* CounterExamplesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterExamplesView.xib; sourceTree = "<group>"; };
+		EF75E2DE268BC7EF000F0F51 /* CounterExampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterExampleTableViewCell.swift; sourceTree = "<group>"; };
+		EF75E2DF268BC7EF000F0F51 /* CounterExampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterExampleTableViewCell.xib; sourceTree = "<group>"; };
+		EF75E2E2268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterLabelCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF75E2E3268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterLabelCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,10 +409,22 @@
 		EF75E2D8268BC05A000F0F51 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EF75E2DD268BC751000F0F51 /* Cells */,
 				EF75E2D9268BC06C000F0F51 /* CounterExamplesViewController.swift */,
 				EF75E2DB268BC15D000F0F51 /* CounterExamplesView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EF75E2DD268BC751000F0F51 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EF75E2DE268BC7EF000F0F51 /* CounterExampleTableViewCell.swift */,
+				EF75E2DF268BC7EF000F0F51 /* CounterExampleTableViewCell.xib */,
+				EF75E2E2268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift */,
+				EF75E2E3268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,9 +535,11 @@
 				EF75E2CC268A38E6000F0F51 /* CreateCounterView.xib in Resources */,
 				DECA257825CC8D4300851431 /* LaunchScreen.storyboard in Resources */,
 				DEED7FCE25CC975D00BA0CDB /* Localizable.strings in Resources */,
+				EF75E2E5268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib in Resources */,
 				DECA257525CC8D4300851431 /* Assets.xcassets in Resources */,
 				EF6D56FF267D991A00FC79E1 /* CountersListView.xib in Resources */,
 				EF75E2DC268BC15D000F0F51 /* CounterExamplesView.xib in Resources */,
+				EF75E2E1268BC7EF000F0F51 /* CounterExampleTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +580,7 @@
 				EF15AF54267DA1C9003D36BF /* BaseViewController.swift in Sources */,
 				EF15AF77267EF4EB003D36BF /* RequestResultType.swift in Sources */,
 				EF15AF57267DA22C003D36BF /* ActivityIndicatorView.swift in Sources */,
+				EF75E2E4268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift in Sources */,
 				DECA256C25CC8D4200851431 /* AppDelegate.swift in Sources */,
 				EF75E2D0268A8297000F0F51 /* CreateCounterPresenter.swift in Sources */,
 				EF6D5704267D9B5500FC79E1 /* MainNavigationController.swift in Sources */,
@@ -565,6 +588,7 @@
 				DE3EBACC25E048CE00DA1E0D /* Button.swift in Sources */,
 				EF6D5706267D9CAD00FC79E1 /* AppNavigator.swift in Sources */,
 				EF15AF6A267ECA80003D36BF /* CountersCardView.swift in Sources */,
+				EF75E2E0268BC7EF000F0F51 /* CounterExampleTableViewCell.swift in Sources */,
 				35EAFB7925CC9E3B00DCFE10 /* Networking.m in Sources */,
 				EF15AF72267EEF9D003D36BF /* CountersMainService.swift in Sources */,
 				350AF6D925E02D5E0000F698 /* WelcomeView.swift in Sources */,
