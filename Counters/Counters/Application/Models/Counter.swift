@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Counter: Codable {
+struct Counter: Decodable {
     var title: String?
     var id: String?
     var count: Int?

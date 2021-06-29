@@ -42,6 +42,10 @@
 		EF6D5706267D9CAD00FC79E1 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D5705267D9CAD00FC79E1 /* AppNavigator.swift */; };
 		EF75E2CA268A38CF000F0F51 /* CreateCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2C9268A38CF000F0F51 /* CreateCounterViewController.swift */; };
 		EF75E2CC268A38E6000F0F51 /* CreateCounterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2CB268A38E6000F0F51 /* CreateCounterView.xib */; };
+		EF75E2D0268A8297000F0F51 /* CreateCounterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2CF268A8297000F0F51 /* CreateCounterPresenter.swift */; };
+		EF75E2D2268A82A9000F0F51 /* CreateCounterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D1268A82A9000F0F51 /* CreateCounterService.swift */; };
+		EF75E2D4268B9DED000F0F51 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D3268B9DED000F0F51 /* String+Extension.swift */; };
+		EF75E2D6268BACBB000F0F51 /* SuccessAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D5268BACBB000F0F51 /* SuccessAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +109,10 @@
 		EF6D5705267D9CAD00FC79E1 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 		EF75E2C9268A38CF000F0F51 /* CreateCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCounterViewController.swift; sourceTree = "<group>"; };
 		EF75E2CB268A38E6000F0F51 /* CreateCounterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCounterView.xib; sourceTree = "<group>"; };
+		EF75E2CF268A8297000F0F51 /* CreateCounterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCounterPresenter.swift; sourceTree = "<group>"; };
+		EF75E2D1268A82A9000F0F51 /* CreateCounterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCounterService.swift; sourceTree = "<group>"; };
+		EF75E2D3268B9DED000F0F51 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		EF75E2D5268BACBB000F0F51 /* SuccessAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +153,7 @@
 			children = (
 				350AF6EC25E0365A0000F698 /* UIImage+Badge.swift */,
 				EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */,
+				EF75E2D3268B9DED000F0F51 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -304,6 +313,7 @@
 				EF15AF56267DA22C003D36BF /* ActivityIndicatorView.swift */,
 				EF15AF5A267DA83E003D36BF /* ScreenSizes.swift */,
 				EF15AF74267EF2B7003D36BF /* UtilUrlFactory.swift */,
+				EF75E2D5268BACBB000F0F51 /* SuccessAnimation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -359,6 +369,8 @@
 		EF75E2C72688274D000F0F51 /* CreateCounter */ = {
 			isa = PBXGroup;
 			children = (
+				EF75E2D1268A82A9000F0F51 /* CreateCounterService.swift */,
+				EF75E2CF268A8297000F0F51 /* CreateCounterPresenter.swift */,
 				EF75E2C82688275C000F0F51 /* View */,
 			);
 			path = CreateCounter;
@@ -508,12 +520,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF15AF62267EBD86003D36BF /* Counter.swift in Sources */,
+				EF75E2D6268BACBB000F0F51 /* SuccessAnimation.swift in Sources */,
 				EF15AF5D267E927F003D36BF /* CountersSearchBar.swift in Sources */,
 				35868D2825E03F090028AF1D /* WelcomeViewPresenter.swift in Sources */,
 				350AF6ED25E0365A0000F698 /* UIImage+Badge.swift in Sources */,
 				EF15AF59267DA4B9003D36BF /* GenericPlaceholderView.swift in Sources */,
 				EF15AF70267EEF06003D36BF /* CountersListService.swift in Sources */,
 				EF6D56FD267D990300FC79E1 /* CountersListViewController.swift in Sources */,
+				EF75E2D2268A82A9000F0F51 /* CreateCounterService.swift in Sources */,
 				DECA257025CC8D4200851431 /* WelcomeViewController.swift in Sources */,
 				EF6D56F9267D8BEA00FC79E1 /* UIColor+Extension.swift in Sources */,
 				EF15AF67267ECA45003D36BF /* CounterTableViewCell.swift in Sources */,
@@ -522,6 +536,7 @@
 				EF15AF77267EF4EB003D36BF /* RequestResultType.swift in Sources */,
 				EF15AF57267DA22C003D36BF /* ActivityIndicatorView.swift in Sources */,
 				DECA256C25CC8D4200851431 /* AppDelegate.swift in Sources */,
+				EF75E2D0268A8297000F0F51 /* CreateCounterPresenter.swift in Sources */,
 				EF6D5704267D9B5500FC79E1 /* MainNavigationController.swift in Sources */,
 				EF15AF64267EC05B003D36BF /* CounterListViewPresenter.swift in Sources */,
 				DE3EBACC25E048CE00DA1E0D /* Button.swift in Sources */,
@@ -533,6 +548,7 @@
 				EF75E2CA268A38CF000F0F51 /* CreateCounterViewController.swift in Sources */,
 				EF15AF75267EF2B7003D36BF /* UtilUrlFactory.swift in Sources */,
 				350AF6E425E035840000F698 /* WelcomeFeatureView.swift in Sources */,
+				EF75E2D4268B9DED000F0F51 /* String+Extension.swift in Sources */,
 				EF15AF5B267DA83E003D36BF /* ScreenSizes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

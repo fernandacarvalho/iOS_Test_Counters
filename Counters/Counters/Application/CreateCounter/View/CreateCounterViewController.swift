@@ -11,11 +11,20 @@ class CreateCounterViewController: BaseViewController {
     
     @IBOutlet weak var nameInputField: UITextField!
     @IBOutlet weak var linkButton: UIButton!
+    private var presenter: CreateCounterPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupLink()
+        presenter = CreateCounterPresenter(delegate: self)
+        setupNavigation()
+        setupTextField()
+        setupLink()
+    }
+    
+    private func setupTextField() {
+        nameInputField.delegate = self
+        nameInputField.addTarget(self, action: #selector(nameTextFieldDidChange(_:)), for: .editingChanged)
     }
     
     private func setupLink() {
@@ -25,6 +34,85 @@ class CreateCounterViewController: BaseViewController {
             NSAttributedString.Key.underlineStyle:1.0
         ])
         
-        self.linkButton.setAttributedTitle(attributedString, for: .normal)
+        linkButton.setAttributedTitle(attributedString, for: .normal)
+    }
+    
+    func clearTextField() {
+        nameInputField.text = ""
+        updateNavigationState()
+    }
+    
+    //MARK: Navigation
+    
+    private func setupNavigation() {
+        self.navigationItem.title = NSLocalizedString("BTN_CREATE_COUNTER", comment: "")
+        setNavigationLeftButton(withTitle: NSLocalizedString("BTN_CANCEL", comment: ""))
+        setNavigationRightButton(withTitle: NSLocalizedString("BTN_SAVE", comment: ""))
+        updateNavigationState()
+    }
+    
+    private func updateNavigationState() {
+        guard let text = nameInputField.text else {
+            updateNavigationRightBarButtonState(enabled: false)
+            return
+        }
+        updateNavigationRightBarButtonState(enabled: !text.withoutWhiteSpaces.isEmpty)
+    }
+    
+    override func handleNavigationLeftBtnClick() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    override func handleNavigationRightBtnClick() {
+        guard let text = nameInputField.text else {return}
+        showActivityIndicator()
+        presenter.saveCounter(withName: text)
+    }
+    
+    //MARK: Success Animation
+    
+    func addSuccessAnimationView() {
+        let animation = SuccessAnimation(delegate: self)
+        animation.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(animation)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        let guide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            animation.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            animation.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            animation.topAnchor.constraint(equalTo: guide.topAnchor),
+            animation.bottomAnchor.constraint(equalTo: guide.bottomAnchor)
+        ])
+    }
+}
+
+//MARK: UITEXTFIELD DELEGATE
+extension CreateCounterViewController: UITextFieldDelegate {
+    @objc func nameTextFieldDidChange(_ textField: UITextField) {
+        updateNavigationState()
+    }
+}
+
+//MARK: PRESENTER DELEGATE
+extension CreateCounterViewController: CreateCounterPresenterDelegate {
+    func createCounterSuccess() {
+        removeActivityIndicator()
+        addSuccessAnimationView()
+        clearTextField()
+    }
+    
+    func showErrorAlert(withTitle title: String, andMessage message: String, btnTitle: String) {
+        removeActivityIndicator()
+        showSimpleAlert(withTitle: title, andMessage: message, buttonTitle: btnTitle)
+    }
+}
+
+extension CreateCounterViewController: SuccessAnimationDelegate {
+    func animationDidEnd() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func willRemoveAnimationFromSuperview() {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }

@@ -15,16 +15,18 @@ class UtilUrlFactory {
             return UtilUrlFactory.baseUrl + "/counters"
         }
         
-        class func counterUrl() -> String {
-            return UtilUrlFactory.baseUrl + "/counter"
-        }
-        
         class func decreaseCounterUrl() -> String {
             return UtilUrlFactory.baseUrl + "/counter/dec"
         }
         
         class func increaseCounterUrl() -> String {
             return UtilUrlFactory.baseUrl + "/counter/inc"
+        }
+    }
+    
+    class CreateCounter {
+        class func counterUrl() -> String {
+            return UtilUrlFactory.baseUrl + "/counter"
         }
     }
 }

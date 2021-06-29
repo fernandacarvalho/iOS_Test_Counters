@@ -64,7 +64,7 @@ class CountersListViewController: BaseViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.refreshValueChanged), for: .valueChanged)
         self.tableView.refreshControl = refreshControl
-        self.tableView.register(UINib(nibName: CounterTableViewCell.self.description(), bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.counter.rawValue)
+        self.tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.counter.rawValue)
     }
     
     @objc func refreshValueChanged() {

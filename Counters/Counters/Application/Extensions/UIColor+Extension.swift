@@ -27,11 +27,6 @@ extension UIColor {
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
     
-//    static let accentColor = UIColor(named: "AccentColor") ?? UIColor(hexString: "#FF9500")
-//    static let background = UIColor(named: "Background") ?? UIColor(hexString: "#ECECEC")
-//    static let buttonText = UIColor(named: "ButtonText") ?? UIColor(hexString: "#FFFFFF")
-//    static let descriptionText = UIColor(named: "descriptionText") ?? UIColor(hexString: "#FFFFFF")
-    
     @Theme(light: UIColor(named: "AccentColor") ?? UIColor(hexString: "#FF9500"),
                dark: UIColor(named: "AccentColor") ?? UIColor(hexString: "#FF9500"))
         static var accentColor: UIColor

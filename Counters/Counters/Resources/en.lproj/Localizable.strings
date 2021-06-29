@@ -29,6 +29,7 @@
 "BTN_SAVE" = "Save";
 "BTN_RETRY" = "Retry";
 "BTN_CREATE_COUNTER" = "Create a counter";
+"BTN_DISMISS" = "Dismiss";
 
 //MARK: - Messages
 "COULDNT_LOAD_COUNTERS" = "Couldn't load the counters";
@@ -37,3 +38,5 @@
 "ERROR" = "Error";
 "COULDNT_UPDATE_COUNTER" = "Couldn't update counter";
 "SEE_EXAMPLES" = "Give it a name. Creative block? See examples.";
+"COULDNT_CREATE_COUNTER" = "Couldn't create the counter";
+"INTERNET_OFFLINE" = "The Internet connection appears to be offline";

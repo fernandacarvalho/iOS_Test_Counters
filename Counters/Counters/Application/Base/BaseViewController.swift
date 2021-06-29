@@ -70,13 +70,14 @@ class BaseViewController: UIViewController {
     
     func showSimpleAlert(withTitle title: String, andMessage message: String?, buttonTitle: String? = "Ok") {
         let alert = UIAlertController(title: title, message: message ?? "", preferredStyle: .alert)
+        alert.view.tintColor = .accentColor
         alert.addAction(UIAlertAction(title: buttonTitle , style: .cancel, handler: nil))
         self.present(alert, animated: true)
     }
     
     func showCallbackAlert(title: String, message: String?, confirmButtonTitle: String? = "Ok", cancelButtonTitle: String? = nil, confirm: @escaping () -> (), cancel: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message ?? "", preferredStyle: .alert)
-        
+        alert.view.tintColor = .accentColor
         alert.addAction(UIAlertAction(title: confirmButtonTitle, style: .default, handler: { (action) in
             confirm()
         }))
@@ -89,6 +90,7 @@ class BaseViewController: UIViewController {
         
         self.present(alert, animated: true)
     }
+
 }
 
 
