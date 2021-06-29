@@ -46,6 +46,8 @@
 		EF75E2D2268A82A9000F0F51 /* CreateCounterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D1268A82A9000F0F51 /* CreateCounterService.swift */; };
 		EF75E2D4268B9DED000F0F51 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D3268B9DED000F0F51 /* String+Extension.swift */; };
 		EF75E2D6268BACBB000F0F51 /* SuccessAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D5268BACBB000F0F51 /* SuccessAnimation.swift */; };
+		EF75E2DA268BC06C000F0F51 /* CounterExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2D9268BC06C000F0F51 /* CounterExamplesViewController.swift */; };
+		EF75E2DC268BC15D000F0F51 /* CounterExamplesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2DB268BC15D000F0F51 /* CounterExamplesView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,8 @@
 		EF75E2D1268A82A9000F0F51 /* CreateCounterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCounterService.swift; sourceTree = "<group>"; };
 		EF75E2D3268B9DED000F0F51 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		EF75E2D5268BACBB000F0F51 /* SuccessAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAnimation.swift; sourceTree = "<group>"; };
+		EF75E2D9268BC06C000F0F51 /* CounterExamplesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterExamplesViewController.swift; sourceTree = "<group>"; };
+		EF75E2DB268BC15D000F0F51 /* CounterExamplesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterExamplesView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +254,7 @@
 				DECA25B225CC910100851431 /* Welcome */,
 				EF6D56FA267D96E600FC79E1 /* CounterList */,
 				EF75E2C72688274D000F0F51 /* CreateCounter */,
+				EF75E2D7268BC04E000F0F51 /* CounterExamples */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -385,6 +390,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EF75E2D7268BC04E000F0F51 /* CounterExamples */ = {
+			isa = PBXGroup;
+			children = (
+				EF75E2D8268BC05A000F0F51 /* View */,
+			);
+			path = CounterExamples;
+			sourceTree = "<group>";
+		};
+		EF75E2D8268BC05A000F0F51 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EF75E2D9268BC06C000F0F51 /* CounterExamplesViewController.swift */,
+				EF75E2DB268BC15D000F0F51 /* CounterExamplesView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -495,6 +517,7 @@
 				DEED7FCE25CC975D00BA0CDB /* Localizable.strings in Resources */,
 				DECA257525CC8D4300851431 /* Assets.xcassets in Resources */,
 				EF6D56FF267D991A00FC79E1 /* CountersListView.xib in Resources */,
+				EF75E2DC268BC15D000F0F51 /* CounterExamplesView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +570,7 @@
 				350AF6D925E02D5E0000F698 /* WelcomeView.swift in Sources */,
 				EF75E2CA268A38CF000F0F51 /* CreateCounterViewController.swift in Sources */,
 				EF15AF75267EF2B7003D36BF /* UtilUrlFactory.swift in Sources */,
+				EF75E2DA268BC06C000F0F51 /* CounterExamplesViewController.swift in Sources */,
 				350AF6E425E035840000F698 /* WelcomeFeatureView.swift in Sources */,
 				EF75E2D4268B9DED000F0F51 /* String+Extension.swift in Sources */,
 				EF15AF5B267DA83E003D36BF /* ScreenSizes.swift in Sources */,

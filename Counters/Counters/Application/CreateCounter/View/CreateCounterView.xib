@@ -27,6 +27,9 @@
                     <state key="normal" title="Give it a name. Creative block? See examples">
                         <color key="titleColor" name="SecondaryText"/>
                     </state>
+                    <connections>
+                        <action selector="openExamples:" destination="-1" eventType="touchUpInside" id="hjp-Dm-s0d"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRg-kE-yQJ">
                     <rect key="frame" x="15" y="74" width="384" height="45"/>

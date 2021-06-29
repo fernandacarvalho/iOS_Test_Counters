@@ -30,6 +30,7 @@
 "BTN_RETRY" = "Retry";
 "BTN_CREATE_COUNTER" = "Create a counter";
 "BTN_DISMISS" = "Dismiss";
+"BTN_CREATE" = "Create";
 
 //MARK: - Messages
 "COULDNT_LOAD_COUNTERS" = "Couldn't load the counters";

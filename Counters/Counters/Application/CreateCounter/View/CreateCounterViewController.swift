@@ -69,6 +69,14 @@ class CreateCounterViewController: BaseViewController {
         presenter.saveCounter(withName: text)
     }
     
+    //MARK: Action
+    
+    @IBAction func openExamples(_ sender: Any) {
+        let controller = CounterExamplesViewController()
+        setNavigationBackButton(withTitle: NSLocalizedString("BTN_CREATE", comment: ""))
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     //MARK: Success Animation
     
     func addSuccessAnimationView() {

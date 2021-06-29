@@ -14,6 +14,15 @@ class BaseViewController: UIViewController {
     }
     
     //MARK: NavigationBar
+    
+    func setNavigationBackButton(withTitle title: String) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        let backButton = UIBarButtonItem()
+        backButton.title = title
+        backButton.tintColor = .accentColor
+        self.navigationItem.backBarButtonItem = backButton
+    }
+    
     func setNavigationLeftButton(withTitle title: String, andImage img: UIImage? = nil) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         let leftButton = UIButton()
