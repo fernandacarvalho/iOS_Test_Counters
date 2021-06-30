@@ -14,7 +14,7 @@ class CountersSearchBar: UISearchBar {
             self.layoutSubviews()
         }
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -32,7 +32,7 @@ class CountersSearchBar: UISearchBar {
             if let iconView = textField.leftView as? UIImageView {
                 iconView.tintColor = isUserInteractionEnabled ? .secondaryText : .disabledText
             }
-        
+            textField.clearButtonMode = .never
         }
     }
 }

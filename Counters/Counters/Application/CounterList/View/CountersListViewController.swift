@@ -150,7 +150,13 @@ extension CountersListViewController: CounterTableViewCellDelegate {
 //MARK: UISEARCHBAR DELEGATE
 extension CountersListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchBar.showsCancelButton = !searchText.isEmpty
         presenter.searchBarTextDidChange(text: searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        self.searchBar(searchBar, textDidChange: searchBar.text!)
     }
 }
 
@@ -180,7 +186,7 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     
     func clearSearch(isEnabled: Bool) {
         searchBar.text = ""
-        presenter.searchBarTextDidChange(text: "")
+        self.searchBar(searchBar, textDidChange: searchBar.text!)
         searchBar.isUserInteractionEnabled = isEnabled
     }
     
