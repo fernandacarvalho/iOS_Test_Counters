@@ -9,6 +9,7 @@ import UIKit
 
 private enum CellReuseIdentifier: String {
     case counter = "counterCell"
+    case empty = "emptyCell"
 }
 
 class CountersListViewController: BaseViewController {
@@ -66,10 +67,12 @@ class CountersListViewController: BaseViewController {
         refreshControl.addTarget(self, action: #selector(self.refreshValueChanged), for: .valueChanged)
         tableView.refreshControl = refreshControl
         tableView.register(UINib(nibName: "CounterTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.counter.rawValue)
+        tableView.register(UINib(nibName: "EmptyListTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.empty.rawValue)
     }
     
     @objc func refreshValueChanged() {
-        self.getList()
+        resetSearchBar()
+        getList()
         DispatchQueue.main.async {
             self.tableView.refreshControl?.endRefreshing()
         }
@@ -117,19 +120,30 @@ class CountersListViewController: BaseViewController {
     override func handleNavigationRightBtnClick() {
         presenter.navigationRightButtonClicked()
     }
+    
+    func resetSearchBar() {
+        searchBar.text = ""
+        searchBar(searchBar, textDidChange: searchBar.text!)
+        self.view.endEditing(true)
+    }
 }
 
 //MARK: TABLEVIEW DELEGATE AND DATA SOURCE
 extension CountersListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.counters.count
+        return presenter.counters.count > 0 ?  presenter.counters.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.counter.rawValue) as? CounterTableViewCell else { return UITableViewCell()
-            
+        if presenter.counters.count > 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.counter.rawValue) as? CounterTableViewCell else { return UITableViewCell()
+            }
+            cell.configureCell(counter: presenter.counters[indexPath.row], delegate: self)
+            return cell
         }
-        cell.configureCell(counter: presenter.counters[indexPath.row], delegate: self)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.empty.rawValue) as? EmptyListTableViewCell else {
+            return UITableViewCell()
+        }
         return cell
     }
 }
@@ -152,11 +166,13 @@ extension CountersListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchBar.showsCancelButton = !searchText.isEmpty
         presenter.searchBarTextDidChange(text: searchText)
+        if searchText.isEmpty {
+            self.view.endEditing(true)
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        self.searchBar(searchBar, textDidChange: searchBar.text!)
+        resetSearchBar()
     }
 }
 
@@ -185,8 +201,7 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     }
     
     func clearSearch(isEnabled: Bool) {
-        searchBar.text = ""
-        self.searchBar(searchBar, textDidChange: searchBar.text!)
+        resetSearchBar()
         searchBar.isUserInteractionEnabled = isEnabled
     }
     

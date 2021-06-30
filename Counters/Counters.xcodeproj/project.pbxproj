@@ -54,6 +54,8 @@
 		EF75E2E5268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2E3268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib */; };
 		EF75E2E7268BD8A1000F0F51 /* CounterExamplesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2E6268BD8A1000F0F51 /* CounterExamplesPresenter.swift */; };
 		EF75E2E9268BF31F000F0F51 /* CounterExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2E8268BF31F000F0F51 /* CounterExample.swift */; };
+		EF75E2EC268C19F0000F0F51 /* EmptyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2EA268C19F0000F0F51 /* EmptyListTableViewCell.swift */; };
+		EF75E2ED268C19F0000F0F51 /* EmptyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2EB268C19F0000F0F51 /* EmptyListTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +131,8 @@
 		EF75E2E3268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterLabelCollectionViewCell.xib; sourceTree = "<group>"; };
 		EF75E2E6268BD8A1000F0F51 /* CounterExamplesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterExamplesPresenter.swift; sourceTree = "<group>"; };
 		EF75E2E8268BF31F000F0F51 /* CounterExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterExample.swift; sourceTree = "<group>"; };
+		EF75E2EA268C19F0000F0F51 /* EmptyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListTableViewCell.swift; sourceTree = "<group>"; };
+		EF75E2EB268C19F0000F0F51 /* EmptyListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyListTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +384,8 @@
 			children = (
 				EF15AF65267ECA45003D36BF /* CounterTableViewCell.swift */,
 				EF15AF66267ECA45003D36BF /* CounterTableViewCell.xib */,
+				EF75E2EA268C19F0000F0F51 /* EmptyListTableViewCell.swift */,
+				EF75E2EB268C19F0000F0F51 /* EmptyListTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -540,6 +546,7 @@
 				EF15AF68267ECA45003D36BF /* CounterTableViewCell.xib in Resources */,
 				EF75E2CC268A38E6000F0F51 /* CreateCounterView.xib in Resources */,
 				DECA257825CC8D4300851431 /* LaunchScreen.storyboard in Resources */,
+				EF75E2ED268C19F0000F0F51 /* EmptyListTableViewCell.xib in Resources */,
 				DEED7FCE25CC975D00BA0CDB /* Localizable.strings in Resources */,
 				EF75E2E5268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib in Resources */,
 				DECA257525CC8D4300851431 /* Assets.xcassets in Resources */,
@@ -603,6 +610,7 @@
 				EF75E2CA268A38CF000F0F51 /* CreateCounterViewController.swift in Sources */,
 				EF15AF75267EF2B7003D36BF /* UtilUrlFactory.swift in Sources */,
 				EF75E2DA268BC06C000F0F51 /* CounterExamplesViewController.swift in Sources */,
+				EF75E2EC268C19F0000F0F51 /* EmptyListTableViewCell.swift in Sources */,
 				350AF6E425E035840000F698 /* WelcomeFeatureView.swift in Sources */,
 				EF75E2D4268B9DED000F0F51 /* String+Extension.swift in Sources */,
 				EF15AF5B267DA83E003D36BF /* ScreenSizes.swift in Sources */,
