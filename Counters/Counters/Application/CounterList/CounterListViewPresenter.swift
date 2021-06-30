@@ -30,6 +30,7 @@ protocol CounterListViewPresenterDelegate: AnyObject {
     func updateNavigationBar()
     func updateSearchBarState(isEnabled: Bool)
     func presentActionSheet(actionSheet: UIAlertController)
+    func shareItems(items: [Any])
 }
 
 final class CounterListViewPresenter {
@@ -137,7 +138,7 @@ final class CounterListViewPresenter {
     
     func bottomViewRightButtonClicked() {
         if isEditionMode {
-            //TODO: share
+            shareSelectedCounters()
         } else {
             delegate?.goToCreateCounter()
         }
@@ -307,6 +308,21 @@ private extension CounterListViewPresenter {
             }
             selectedCounters = nil
             deleteCount = 0
+        }
+    }
+    
+    func shareSelectedCounters() {
+        var items = [String]()
+        if let rows = selectedCounters,
+           rows.count > 0 {
+            for row in rows {
+                let counter = allCounters[row.row]
+                if let name = counter.title, let count = counter.count {
+                    let description = "\(count) x \(name)"
+                    items.append(description)
+                }
+            }
+            delegate?.shareItems(items: items)
         }
     }
 }

@@ -77,14 +77,14 @@ class BaseViewController: UIViewController {
     
     //MARK: Alert
     
-    func showSimpleAlert(withTitle title: String, andMessage message: String?, buttonTitle: String? = "Ok") {
+    func showSimpleAlert(withTitle title: String, andMessage message: String?, buttonTitle: String? = NSLocalizedString("BTN_DISMISS", comment: "")) {
         let alert = UIAlertController(title: title, message: message ?? "", preferredStyle: .alert)
         alert.view.tintColor = .accentColor
         alert.addAction(UIAlertAction(title: buttonTitle , style: .cancel, handler: nil))
         self.present(alert, animated: true)
     }
     
-    func showCallbackAlert(title: String, message: String?, confirmButtonTitle: String? = "Ok", cancelButtonTitle: String? = nil, confirm: @escaping () -> (), cancel: (() -> Void)? = nil) {
+    func showCallbackAlert(title: String, message: String?, confirmButtonTitle: String? = NSLocalizedString("BTN_DISMISS", comment: ""), cancelButtonTitle: String? = nil, confirm: @escaping () -> (), cancel: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message ?? "", preferredStyle: .alert)
         alert.view.tintColor = .accentColor
         alert.addAction(UIAlertAction(title: confirmButtonTitle, style: .default, handler: { (action) in

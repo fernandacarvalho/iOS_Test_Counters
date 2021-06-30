@@ -272,4 +272,9 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     func presentActionSheet(actionSheet: UIAlertController) {
         self.present(actionSheet, animated: true, completion: nil)
     }
+    
+    func shareItems(items: [Any]) {
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.present(activityController, animated: true, completion: nil)
+    }
 }
