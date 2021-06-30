@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OiGTCardView: UIView {
+class CountersCardView: UIView {
 
         override func layoutSubviews() {
             super.layoutSubviews()
@@ -17,7 +17,7 @@ class OiGTCardView: UIView {
         }
 }
 
-class OiGTShadowCard: OiGTCardView {
+class CountersShadowCard: CountersCardView {
     override func layoutSubviews() {
         super.layoutSubviews()
         

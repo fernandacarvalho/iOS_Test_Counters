@@ -15,14 +15,15 @@ public enum CounterListPlaceholderAction {
 }
 
 protocol CounterListViewPresenterDelegate: AnyObject {
+    func reloadTableView()
     func refreshList()
+    func clearSearch(isEnabled: Bool)
     func goToCreateCounter()
     func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String)
     func showAlert(withTitle title: String, andMessage message: String)
     func stopLoading()
     func getCountersSuccess()
-    func increaseCounterSuccess()
-    func decreaseCounterSuccess()
+    func counterUpdateCountingSuccess()
     func updateBottomViewWith(leftButtonEnabled: Bool, rightButtonIcon: UIImage, totalItems: String, totalCounts: String)
     func updateNavigationBar()
 }
@@ -37,6 +38,12 @@ final class CounterListViewPresenter {
     private(set) var isEditionAvailable: Bool = false {
         didSet {
             self.delegate?.updateNavigationBar()
+        }
+    }
+    
+    private var allCounters: [Counter] = [Counter]() {
+        didSet {
+            counters = allCounters
         }
     }
     private(set) var counters: [Counter] = [Counter]()
@@ -54,7 +61,7 @@ final class CounterListViewPresenter {
             guard let selfObj = self else { return }
             switch response {
             case .success(let counters):
-                selfObj.counters = counters
+                selfObj.allCounters = counters
                 selfObj.delegate?.getCountersSuccess()
                 selfObj.checkEmptyCountersList()
                 selfObj.updateCounts()
@@ -86,8 +93,8 @@ final class CounterListViewPresenter {
             guard let selfObj = self else { return }
             switch response {
             case .success(let counters):
-                selfObj.counters = counters
-                selfObj.delegate?.decreaseCounterSuccess()
+                selfObj.allCounters = counters
+                selfObj.delegate?.counterUpdateCountingSuccess()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
                 selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
@@ -104,8 +111,8 @@ final class CounterListViewPresenter {
             guard let selfObj = self else { return }
             switch response {
             case .success(let counters):
-                selfObj.counters = counters
-                selfObj.delegate?.increaseCounterSuccess()
+                selfObj.allCounters = counters
+                selfObj.delegate?.counterUpdateCountingSuccess()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
                 selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
@@ -127,12 +134,40 @@ final class CounterListViewPresenter {
     
     func navigationLeftButtonClicked() {
         isEditionMode = !isEditionMode
+        delegate?.clearSearch(isEnabled: !isEditionMode)
     }
     
     func navigationRightButtonClicked() {
         //TODO: select all
     }
     
+    func searchBarTextDidChange(text: String) {
+        if text.isEmpty {
+            counters = allCounters
+            //todo remover placeholder
+        } else {
+            counters = [Counter]()
+            var result = [Counter]()
+            for counter in self.allCounters {
+                if(counter.title?.lowercased().range(of: text.lowercased()) != nil) {
+                    result.append(counter)
+                }
+            }
+            counters = result.sorted(by: { (item1, item2) -> Bool in
+                if let name1 = item1.title, let name2 = item2.title {
+                    return name1 < name2
+                }
+                return false
+            })
+            if counters.count > 0 {
+                //todo show placeholder
+            } else {
+                //todo remover placeholder
+            }
+        }
+        
+        delegate?.reloadTableView()
+    }
 }
 
 private extension CounterListViewPresenter {
