@@ -31,6 +31,7 @@
 "BTN_CREATE_COUNTER" = "Create a counter";
 "BTN_DISMISS" = "Dismiss";
 "BTN_CREATE" = "Create";
+"BTN_DELETE_SELECTED_COUNTERS" = "Delete selected counters";
 
 //MARK: - Messages
 "COULDNT_LOAD_COUNTERS" = "Couldn't load the counters";
@@ -41,3 +42,4 @@
 "SEE_EXAMPLES" = "Give it a name. Creative block? See examples.";
 "COULDNT_CREATE_COUNTER" = "Couldn't create the counter";
 "INTERNET_OFFLINE" = "The Internet connection appears to be offline";
+"COULDNT_DELETE_COUNTER" = "Couldn't delete counter";

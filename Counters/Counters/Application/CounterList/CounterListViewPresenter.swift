@@ -23,11 +23,13 @@ protocol CounterListViewPresenterDelegate: AnyObject {
     func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String)
     func showAlert(withTitle title: String, andMessage message: String)
     func stopLoading()
+    func showLoading()
     func getCountersSuccess()
     func counterUpdateCountingSuccess()
     func updateBottomViewWith(leftButtonEnabled: Bool, rightButtonIcon: UIImage, totalItems: String, totalCounts: String)
     func updateNavigationBar()
     func updateSearchBarState(isEnabled: Bool)
+    func presentActionSheet(actionSheet: UIAlertController)
 }
 
 final class CounterListViewPresenter {
@@ -53,6 +55,9 @@ final class CounterListViewPresenter {
     private weak var delegate: CounterListViewPresenterDelegate?
     private let service: CountersListService
     private var placeholderAction: CounterListPlaceholderAction = .none
+    private var selectedCounters: [IndexPath]?
+    private var deleteCount: Int = 0
+    private var deleteErrors = [BaseResponse]()
     
     init(delegate: CounterListViewPresenterDelegate, service: CountersListService = CountersListService()) {
         self.delegate = delegate
@@ -127,7 +132,7 @@ final class CounterListViewPresenter {
     }
     
     func bottomViewLeftButtonClicked() {
-        //TODO: delete
+        createActionSheet()
     }
     
     func bottomViewRightButtonClicked() {
@@ -151,7 +156,6 @@ final class CounterListViewPresenter {
     func searchBarTextDidChange(text: String) {
         if text.isEmpty {
             counters = allCounters
-            //todo remover placeholder
         } else {
             counters = [Counter]()
             var result = [Counter]()
@@ -166,14 +170,12 @@ final class CounterListViewPresenter {
                 }
                 return false
             })
-            if counters.count > 0 {
-                //todo show placeholder
-            } else {
-                //todo remover placeholder
-            }
         }
-        
         delegate?.reloadTableView()
+    }
+    
+    func setSelectedTableViewRows(rows: [IndexPath]?) {
+        selectedCounters = rows
     }
 }
 
@@ -247,5 +249,64 @@ private extension CounterListViewPresenter {
             }
         }
         return "Counted \(totalCount) times"
+    }
+    
+    func createActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.view.tintColor = .accentColor
+        let cancelAction = UIAlertAction(title: NSLocalizedString("BTN_CANCEL", comment: ""), style: .cancel)
+        
+        let delete = UIAlertAction(title: NSLocalizedString("BTN_DELETE_SELECTED_COUNTERS", comment: ""), style: .default) { action in
+            self.deleteSelectedCounters()
+        }
+        actionSheet.addAction(cancelAction)
+        actionSheet.addAction(delete)
+        delegate?.presentActionSheet(actionSheet: actionSheet)
+    }
+    
+    func deleteSelectedCounters() {
+        if let rows = selectedCounters,
+           rows.count > 0 {
+            delegate?.showLoading()
+            for row in rows {
+                deleteCounter(counter: allCounters[row.row])
+            }
+        }
+    }
+    
+    func deleteCounter(counter: Counter) {
+        guard let id = counter.id else {return}
+        service.deleteCounter(counterId: id, completionHandler: handleCountersDeletion(response:))
+    }
+    
+    func handleCountersDeletion(response: RequestResultType<[Counter]>) {
+        deleteCount += 1
+        
+        switch response {
+        case .success( _):
+            debugPrint("counter deleted")
+        case .failure(let error):
+            debugPrint("didn't delete counter")
+            deleteErrors.append(error)
+        }
+        
+        if let totalCount = selectedCounters?.count, deleteCount == totalCount {
+            delegate?.stopLoading()
+            navigationLeftButtonClicked()
+            delegate?.refreshList()
+            if deleteErrors.count != 0 {
+                let title = NSLocalizedString("COULDNT_DELETE_COUNTER", comment: "")
+                var message = ""
+                for error in deleteErrors {
+                    let result = allCounters.filter({$0.id == error.message})
+                    if let counter = result.first, let title = counter.title {
+                        message += "\n \(title)"
+                    }
+                }
+                delegate?.showAlert(withTitle: title, andMessage: message)
+            }
+            selectedCounters = nil
+            deleteCount = 0
+        }
     }
 }

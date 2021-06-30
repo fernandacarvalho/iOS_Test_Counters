@@ -146,6 +146,10 @@ extension CountersListViewController: UITableViewDelegate, UITableViewDataSource
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.setSelectedTableViewRows(rows: tableView.indexPathsForSelectedRows)
+    }
 }
 
 //MARK: TABLEVIEWCELL DELEGATE
@@ -192,6 +196,10 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
         removeActivityIndicator()
     }
     
+    func showLoading() {
+        showActivityIndicator()
+    }
+    
     func reloadTableView() {
         if presenter.isEditionMode {
             tableView.allowsMultipleSelection = true
@@ -208,7 +216,10 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     func selectAllTableViewRows() {
         for section in 0..<tableView.numberOfSections {
             for row in 0..<tableView.numberOfRows(inSection: section) {
-                tableView.selectRow(at: IndexPath(row: row, section: section), animated: false, scrollPosition: .none)
+                let indexPath = IndexPath(row: row, section: section)
+                _ = tableView.delegate?.tableView?(tableView, willSelectRowAt: indexPath)
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                tableView.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
             }
         }
     }
@@ -256,5 +267,9 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     
     func updateSearchBarState(isEnabled: Bool) {
         searchBar.isUserInteractionEnabled = isEnabled
+    }
+    
+    func presentActionSheet(actionSheet: UIAlertController) {
+        self.present(actionSheet, animated: true, completion: nil)
     }
 }

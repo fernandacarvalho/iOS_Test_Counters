@@ -56,6 +56,30 @@ class CountersMainService: NSObject {
         }.resume()
     }
     
+    func deleteFromServer(url: String,
+                       parameters: [String:String],
+                       completionHandler: @escaping (RequestResultType<Any>) -> Void) {
+        
+        guard let requestUrl = URL(string: url) else {return}
+        let service = Networking()
+        service.dataRequest(requestUrl, httpMethod: "DELETE", parameters: parameters) { [unowned self] response, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
+                    completionHandler(.failure(baseResponse))
+                    return
+                }
+                
+                guard let data = response as? Data else {
+                    let baseResponse = self.getBaseResponseError(title: "Error", message: error?.localizedDescription ?? "Please, try again.")
+                    completionHandler(.failure(baseResponse))
+                    return
+                }
+                completionHandler(.success(data))
+            }
+        }.resume()
+    }
+    
     func getBaseResponseError(title: String, message: String) -> BaseResponse {
         return BaseResponse(title: NSLocalizedString("ERROR", comment: ""), message: message)
     }

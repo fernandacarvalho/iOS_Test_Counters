@@ -74,4 +74,30 @@ class CountersListService: CountersMainService {
             }
         }
     }
+    
+    func deleteCounter(counterId: String, completionHandler: @escaping (RequestResultType<[Counter]>) -> Void) {
+        let url = UtilUrlFactory.CountersList.deleteCounterUrl()
+        let param: [String:String] = [
+            "id": counterId
+        ]
+                
+        self.deleteFromServer(url: url, parameters: param) { response in
+            switch response {
+            case .success(let data):
+                do {
+                    let list = try JSONDecoder().decode([Counter].self, from: data as! Data)
+                    completionHandler(.success(list))
+                } catch {
+                    let baseResponse = BaseResponse(
+                        title: NSLocalizedString("COULDNT_DELETE_COUNTER", comment: ""),
+                        message: counterId)
+                    completionHandler(.failure(baseResponse))
+                }
+            case .failure(let baseResponse):
+                baseResponse.title = NSLocalizedString("COULDNT_DELETE_COUNTER", comment: "")
+                baseResponse.message = counterId
+                completionHandler(.failure(baseResponse))
+            }
+        }
+    }
 }

@@ -22,6 +22,10 @@ class UtilUrlFactory {
         class func increaseCounterUrl() -> String {
             return UtilUrlFactory.baseUrl + "/counter/inc"
         }
+        
+        class func deleteCounterUrl() -> String {
+            return UtilUrlFactory.baseUrl + "/counter"
+        }
     }
     
     class CreateCounter {
