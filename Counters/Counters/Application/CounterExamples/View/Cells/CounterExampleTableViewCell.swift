@@ -11,11 +11,16 @@ private enum CellReuseIdentifiers: String {
     case labelCell = "labelCell"
 }
 
+protocol CounterExampleCellDelegate: AnyObject {
+    func didSelectExampleItem(item: String)
+}
+
 class CounterExampleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var exampleTitle: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     private var example: CounterExample?
+    private weak var delegate: CounterExampleCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,9 +49,10 @@ class CounterExampleTableViewCell: UITableViewCell {
         self.collectionView.dataSource = self
     }
     
-    func configureCellWith(example: CounterExample) {
+    func configureCellWith(example: CounterExample, delegate: CounterExampleCellDelegate) {
         exampleTitle.text = example.type.uppercased()
         self.example = example
+        self.delegate = delegate
     }
 }
 
@@ -79,9 +85,15 @@ extension CounterExampleTableViewCell: UICollectionViewDelegate, UICollectionVie
         let text = list[indexPath.item]
         let font = UIFont.systemFont(ofSize: 14.0)
         let textSize: CGSize = text.size(withAttributes: [NSAttributedString.Key.font: font])
-        let margins : CGFloat = 40
+        let margins : CGFloat = indexPath.item != 0 && indexPath.item != list.count - 1 ? 40 : 50
         let size = CGSize(width: textSize.width + margins, height: 50.0)
         return size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let item = example?.list[indexPath.item] {
+            delegate?.didSelectExampleItem(item: item)
+        }
     }
 }
 

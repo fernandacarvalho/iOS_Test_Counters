@@ -11,10 +11,24 @@ private enum CellReuseIdentifiers: String {
     case exampleCell = "exampleCell"
 }
 
+protocol CounterExamplesDelegate: AnyObject {
+    func didSelectExample(name: String)
+}
+
 class CounterExamplesViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var presenter = CounterExamplesPresenter()
+    private weak var delegate: CounterExamplesDelegate?
+    
+    init(delegate: CounterExamplesDelegate) {
+        super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +49,7 @@ class CounterExamplesViewController: BaseViewController {
     }
 }
 
+//MARK: UITABLEVIEW DELEGATE AND DATASOURCE
 extension CounterExamplesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,7 +63,15 @@ extension CounterExamplesViewController: UITableViewDelegate, UITableViewDataSou
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifiers.exampleCell.rawValue, for: indexPath) as? CounterExampleTableViewCell else {
             return UITableViewCell()
         }
-        cell.configureCellWith(example: presenter.viewModel[indexPath.section])
+        cell.configureCellWith(example: presenter.viewModel[indexPath.section], delegate: self)
         return cell
+    }
+}
+
+//MARK: TABLEVIEWCELL DELEGATE
+extension CounterExamplesViewController: CounterExampleCellDelegate {
+    func didSelectExampleItem(item: String) {
+        delegate?.didSelectExample(name: item)
+        navigationController?.popViewController(animated: true)
     }
 }

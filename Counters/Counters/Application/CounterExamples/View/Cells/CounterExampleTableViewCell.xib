@@ -25,7 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Jib-15-l3t">
-                        <rect key="frame" x="20" y="45" width="280" height="50"/>
+                        <rect key="frame" x="0.0" y="45" width="320" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="bCL-Oe-5Tn"/>
@@ -34,16 +34,16 @@
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
                 </subviews>
                 <color key="backgroundColor" name="Background"/>
                 <constraints>
-                    <constraint firstItem="Jib-15-l3t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="HQY-pu-dDc"/>
+                    <constraint firstItem="Jib-15-l3t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HQY-pu-dDc"/>
                     <constraint firstItem="LaR-Ty-jtg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Mjo-m4-ZfO"/>
                     <constraint firstItem="LaR-Ty-jtg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Mvv-PW-BfZ"/>
-                    <constraint firstAttribute="trailing" secondItem="Jib-15-l3t" secondAttribute="trailing" constant="20" id="X4C-r0-Qqi"/>
+                    <constraint firstAttribute="trailing" secondItem="Jib-15-l3t" secondAttribute="trailing" id="X4C-r0-Qqi"/>
                     <constraint firstItem="Jib-15-l3t" firstAttribute="top" secondItem="LaR-Ty-jtg" secondAttribute="bottom" constant="15" id="kZQ-mL-VVj"/>
                     <constraint firstAttribute="bottom" secondItem="Jib-15-l3t" secondAttribute="bottom" constant="20" symbolic="YES" id="sr8-Lv-Eff"/>
                     <constraint firstAttribute="trailing" secondItem="LaR-Ty-jtg" secondAttribute="trailing" constant="20" id="tb9-B6-kIk"/>

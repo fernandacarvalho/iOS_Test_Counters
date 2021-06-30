@@ -72,7 +72,7 @@ class CreateCounterViewController: BaseViewController {
     //MARK: Action
     
     @IBAction func openExamples(_ sender: Any) {
-        let controller = CounterExamplesViewController()
+        let controller = CounterExamplesViewController(delegate: self)
         setNavigationBackButton(withTitle: NSLocalizedString("BTN_CREATE", comment: ""))
         self.navigationController?.pushViewController(controller, animated: true)
     }
@@ -115,6 +115,7 @@ extension CreateCounterViewController: CreateCounterPresenterDelegate {
     }
 }
 
+//MARK: SUCCESS ANIMATION DELEGATE
 extension CreateCounterViewController: SuccessAnimationDelegate {
     func animationDidEnd() {
         self.navigationController?.popViewController(animated: true)
@@ -122,5 +123,13 @@ extension CreateCounterViewController: SuccessAnimationDelegate {
     
     func willRemoveAnimationFromSuperview() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+}
+
+//MARK: EXAMPLES SCREEN DELEGATE
+extension CreateCounterViewController: CounterExamplesDelegate {
+    func didSelectExample(name: String) {
+        self.nameInputField.text = name
+        updateNavigationState()
     }
 }
