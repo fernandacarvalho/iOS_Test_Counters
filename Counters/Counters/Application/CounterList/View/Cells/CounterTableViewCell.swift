@@ -14,6 +14,7 @@ protocol CounterTableViewCellDelegate: AnyObject {
 
 class CounterTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var selectButton: UIImageView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var decreaseBtn: UIButton!
@@ -25,6 +26,7 @@ class CounterTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.selectionStyle = .none
         decreaseBtn.setTitleColor(.disabledText, for: .disabled)
         decreaseBtn.setTitleColor(.primaryText, for: .normal)
         increaseBtn.setTitleColor(.disabledText, for: .disabled)
@@ -34,25 +36,29 @@ class CounterTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        let image = selected ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "circle")
+        selectButton.image = image
     }
     
-    func configureCell(counter: Counter, delegate: CounterTableViewCellDelegate) {
+    func configureCell(counter: Counter, delegate: CounterTableViewCellDelegate, updateAvailable: Bool) {
         self.counter = counter
         self.delegate = delegate
         countLabel.text = counter.count != nil ? "\(counter.count!)" : "0"
         nameLabel.text = counter.title ?? ""
-        updateUI()
+        updateUI(updateAvailable: updateAvailable)
     }
     
-    func updateUI() {
+    func updateUI(updateAvailable: Bool) {
         if let count = counter?.count {
             countLabel.textColor = count == 0 ? .disabledText : .accentColor
-            decreaseBtn.isEnabled = count != 0
+            decreaseBtn.isEnabled = count != 0 && updateAvailable
+            increaseBtn.isEnabled = updateAvailable
         } else {
             countLabel.textColor = .disabledText
             decreaseBtn.isEnabled = false
+            increaseBtn.isEnabled = false
         }
+        selectButton.isHidden = updateAvailable
     }
     
     @IBAction func decreaseCounterClicked(_ sender: Any) {

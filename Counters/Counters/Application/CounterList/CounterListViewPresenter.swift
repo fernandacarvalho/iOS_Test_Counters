@@ -16,6 +16,7 @@ public enum CounterListPlaceholderAction {
 
 protocol CounterListViewPresenterDelegate: AnyObject {
     func reloadTableView()
+    func selectAllTableViewRows()
     func refreshList()
     func clearSearch(isEnabled: Bool)
     func goToCreateCounter()
@@ -140,10 +141,11 @@ final class CounterListViewPresenter {
     func navigationLeftButtonClicked() {
         isEditionMode = !isEditionMode
         delegate?.clearSearch(isEnabled: !isEditionMode)
+        delegate?.reloadTableView()
     }
     
     func navigationRightButtonClicked() {
-        //TODO: select all
+        delegate?.selectAllTableViewRows()
     }
     
     func searchBarTextDidChange(text: String) {

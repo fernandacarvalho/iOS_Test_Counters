@@ -138,7 +138,7 @@ extension CountersListViewController: UITableViewDelegate, UITableViewDataSource
         if presenter.counters.count > 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.counter.rawValue) as? CounterTableViewCell else { return UITableViewCell()
             }
-            cell.configureCell(counter: presenter.counters[indexPath.row], delegate: self)
+            cell.configureCell(counter: presenter.counters[indexPath.row], delegate: self, updateAvailable: !presenter.isEditionMode)
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.empty.rawValue) as? EmptyListTableViewCell else {
@@ -193,7 +193,24 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     }
     
     func reloadTableView() {
+        if presenter.isEditionMode {
+            tableView.allowsMultipleSelection = true
+            tableView.allowsMultipleSelectionDuringEditing = true
+        } else {
+            tableView.allowsSelection = false
+            tableView.allowsSelectionDuringEditing = false
+        }
+        
+        tableView.allowsMultipleSelectionDuringEditing = true
         tableView.reloadData()
+    }
+    
+    func selectAllTableViewRows() {
+        for section in 0..<tableView.numberOfSections {
+            for row in 0..<tableView.numberOfRows(inSection: section) {
+                tableView.selectRow(at: IndexPath(row: row, section: section), animated: false, scrollPosition: .none)
+            }
+        }
     }
     
     func refreshList() {
