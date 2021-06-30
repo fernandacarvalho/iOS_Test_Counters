@@ -132,6 +132,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="countLabel" destination="Mf1-Wi-syS" id="MJn-SU-RcC"/>
+                <outlet property="decreaseBtn" destination="b7Z-Dn-sjc" id="YgW-0u-ac4"/>
+                <outlet property="increaseBtn" destination="7OW-Zi-Izj" id="HAR-ez-Wsz"/>
                 <outlet property="nameLabel" destination="6HH-cf-ETy" id="OlZ-6J-ste"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="163.39285714285714"/>

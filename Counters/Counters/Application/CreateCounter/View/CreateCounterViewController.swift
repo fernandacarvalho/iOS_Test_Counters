@@ -65,6 +65,7 @@ class CreateCounterViewController: BaseViewController {
     
     override func handleNavigationRightBtnClick() {
         guard let text = nameInputField.text else {return}
+        self.view.endEditing(true)
         showActivityIndicator()
         presenter.saveCounter(withName: text)
     }

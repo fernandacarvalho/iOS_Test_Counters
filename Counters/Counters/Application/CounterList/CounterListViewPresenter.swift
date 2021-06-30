@@ -26,18 +26,20 @@ protocol CounterListViewPresenterDelegate: AnyObject {
     func counterUpdateCountingSuccess()
     func updateBottomViewWith(leftButtonEnabled: Bool, rightButtonIcon: UIImage, totalItems: String, totalCounts: String)
     func updateNavigationBar()
+    func updateSearchBarState(isEnabled: Bool)
 }
 
 final class CounterListViewPresenter {
     
     private(set) var isEditionMode: Bool = false {
         didSet {
-            self.updateCounts()
+            updateCounts()
         }
     }
     private(set) var isEditionAvailable: Bool = false {
         didSet {
-            self.delegate?.updateNavigationBar()
+            delegate?.updateNavigationBar()
+            delegate?.updateSearchBarState(isEnabled: isEditionAvailable)
         }
     }
     
@@ -68,17 +70,18 @@ final class CounterListViewPresenter {
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
                 selfObj.showRetryPlaceholder(error: error)
+                selfObj.isEditionAvailable = false
                 selfObj.updateCounts()
             }
         }
     }
     
     func placeholderButtonClicked() {
-        switch self.placeholderAction {
+        switch placeholderAction {
         case .getCounters:
-            self.delegate?.refreshList()
+            delegate?.refreshList()
         case .createCounter:
-            self.delegate?.goToCreateCounter()
+            delegate?.goToCreateCounter()
         default:
             break
         }
@@ -86,7 +89,7 @@ final class CounterListViewPresenter {
     
     func decreaseBtnClicked(counter: Counter) {
         guard let id = counter.id else {
-            self.delegate?.stopLoading()
+            delegate?.stopLoading()
             return
         }
         self.service.decreaseCounter(counterId: "\(id)") { [weak self] response in
@@ -95,6 +98,7 @@ final class CounterListViewPresenter {
             case .success(let counters):
                 selfObj.allCounters = counters
                 selfObj.delegate?.counterUpdateCountingSuccess()
+                selfObj.updateCounts()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
                 selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
@@ -104,7 +108,7 @@ final class CounterListViewPresenter {
     
     func increaseBtnClicked(counter: Counter) {
         guard let id = counter.id else {
-            self.delegate?.stopLoading()
+            delegate?.stopLoading()
             return
         }
         self.service.increaseCounter(counterId: "\(id)") { [weak self] response in
@@ -113,6 +117,7 @@ final class CounterListViewPresenter {
             case .success(let counters):
                 selfObj.allCounters = counters
                 selfObj.delegate?.counterUpdateCountingSuccess()
+                selfObj.updateCounts()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
                 selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
@@ -128,7 +133,7 @@ final class CounterListViewPresenter {
         if isEditionMode {
             //TODO: share
         } else {
-            self.delegate?.goToCreateCounter()
+            delegate?.goToCreateCounter()
         }
     }
     
@@ -148,7 +153,7 @@ final class CounterListViewPresenter {
         } else {
             counters = [Counter]()
             var result = [Counter]()
-            for counter in self.allCounters {
+            for counter in allCounters {
                 if(counter.title?.lowercased().range(of: text.lowercased()) != nil) {
                     result.append(counter)
                 }
@@ -172,25 +177,25 @@ final class CounterListViewPresenter {
 
 private extension CounterListViewPresenter {
     func checkEmptyCountersList() {
-        if self.counters.count == 0 {
-            self.isEditionAvailable = false
-            self.showNoCountersPlaceholder()
+        if counters.count == 0 {
+            isEditionAvailable = false
+            showNoCountersPlaceholder()
         } else {
-            self.isEditionAvailable = true
+            isEditionAvailable = true
         }
     }
     
     func showNoCountersPlaceholder() {
-        self.placeholderAction = .createCounter
-        self.delegate?.showPlaceholder(
+        placeholderAction = .createCounter
+        delegate?.showPlaceholder(
             withTitle: NSLocalizedString("NO_COUNTERS", comment: ""),
             subtitle: NSLocalizedString("NO_COUNTERS_DESCRIPTION", comment: ""),
             btnTitle: NSLocalizedString("BTN_CREATE_COUNTER", comment: ""))
     }
     
     func showRetryPlaceholder(error: BaseResponse) {
-        self.placeholderAction = .getCounters
-        self.delegate?.showPlaceholder(
+        placeholderAction = .getCounters
+        delegate?.showPlaceholder(
             withTitle: error.title,
             subtitle: error.message,
             btnTitle:  NSLocalizedString("RETRY", comment: ""))
@@ -206,39 +211,39 @@ private extension CounterListViewPresenter {
     
     func setViewEditionMode(){
         guard let image = UIImage(systemName: "square.and.arrow.up") else {return}
-        self.delegate?.updateBottomViewWith(
+        delegate?.updateBottomViewWith(
             leftButtonEnabled: true,
             rightButtonIcon: image,
             totalItems: "",
             totalCounts: "")
-        self.delegate?.updateNavigationBar()
+        delegate?.updateNavigationBar()
     }
     
     func dismissViewEditionMode() {
         guard let image = UIImage(systemName: "plus") else {return}
         let totalItems = getNumberOfCountersDescription()
         let totalCounts = getCountedDescription()
-        self.delegate?.updateBottomViewWith(
+        delegate?.updateBottomViewWith(
             leftButtonEnabled: false,
             rightButtonIcon: image,
             totalItems: totalItems,
             totalCounts: totalCounts)
-        self.delegate?.updateNavigationBar()
+        delegate?.updateNavigationBar()
     }
     
     func getNumberOfCountersDescription() -> String {
-        guard self.counters.count != 0 else {return ""}
-        return "\(self.counters.count) items • "
+        guard counters.count != 0 else {return ""}
+        return "\(counters.count) items • "
     }
     
     func getCountedDescription() -> String {
-        guard self.counters.count != 0 else {return ""}
+        guard counters.count != 0 else {return ""}
         var totalCount = 0
         for counter in counters {
             if let count = counter.count {
                 totalCount += count
             }
         }
-        return totalCount != 0 ? "Counted \(totalCount) times" : ""
+        return "Counted \(totalCount) times"
     }
 }

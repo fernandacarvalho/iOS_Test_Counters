@@ -202,7 +202,7 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     
     func clearSearch(isEnabled: Bool) {
         resetSearchBar()
-        searchBar.isUserInteractionEnabled = isEnabled
+        updateSearchBarState(isEnabled: isEnabled)
     }
     
     func counterUpdateCountingSuccess() {
@@ -235,5 +235,9 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     func updateNavigationBar() {
         setupNavigation()
         updateNavigationState()
+    }
+    
+    func updateSearchBarState(isEnabled: Bool) {
+        searchBar.isUserInteractionEnabled = isEnabled
     }
 }
