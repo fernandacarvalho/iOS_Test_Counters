@@ -52,6 +52,8 @@
 		EF75E2E1268BC7EF000F0F51 /* CounterExampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2DF268BC7EF000F0F51 /* CounterExampleTableViewCell.xib */; };
 		EF75E2E4268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2E2268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift */; };
 		EF75E2E5268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2E3268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib */; };
+		EF75E2E7268BD8A1000F0F51 /* CounterExamplesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2E6268BD8A1000F0F51 /* CounterExamplesPresenter.swift */; };
+		EF75E2E9268BF31F000F0F51 /* CounterExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2E8268BF31F000F0F51 /* CounterExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +127,8 @@
 		EF75E2DF268BC7EF000F0F51 /* CounterExampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterExampleTableViewCell.xib; sourceTree = "<group>"; };
 		EF75E2E2268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterLabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		EF75E2E3268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterLabelCollectionViewCell.xib; sourceTree = "<group>"; };
+		EF75E2E6268BD8A1000F0F51 /* CounterExamplesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterExamplesPresenter.swift; sourceTree = "<group>"; };
+		EF75E2E8268BF31F000F0F51 /* CounterExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +341,7 @@
 				EF15AF61267EBD86003D36BF /* Counter.swift */,
 				EF15AF76267EF4EB003D36BF /* RequestResultType.swift */,
 				EF15AF78267F0488003D36BF /* BaseResponse.swift */,
+				EF75E2E8268BF31F000F0F51 /* CounterExample.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 		EF75E2D7268BC04E000F0F51 /* CounterExamples */ = {
 			isa = PBXGroup;
 			children = (
+				EF75E2E6268BD8A1000F0F51 /* CounterExamplesPresenter.swift */,
 				EF75E2D8268BC05A000F0F51 /* View */,
 			);
 			path = CounterExamples;
@@ -580,8 +586,10 @@
 				EF15AF54267DA1C9003D36BF /* BaseViewController.swift in Sources */,
 				EF15AF77267EF4EB003D36BF /* RequestResultType.swift in Sources */,
 				EF15AF57267DA22C003D36BF /* ActivityIndicatorView.swift in Sources */,
+				EF75E2E7268BD8A1000F0F51 /* CounterExamplesPresenter.swift in Sources */,
 				EF75E2E4268BCC1C000F0F51 /* CounterLabelCollectionViewCell.swift in Sources */,
 				DECA256C25CC8D4200851431 /* AppDelegate.swift in Sources */,
+				EF75E2E9268BF31F000F0F51 /* CounterExample.swift in Sources */,
 				EF75E2D0268A8297000F0F51 /* CreateCounterPresenter.swift in Sources */,
 				EF6D5704267D9B5500FC79E1 /* MainNavigationController.swift in Sources */,
 				EF15AF64267EC05B003D36BF /* CounterListViewPresenter.swift in Sources */,

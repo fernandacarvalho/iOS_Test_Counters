@@ -14,10 +14,10 @@ private enum CellReuseIdentifiers: String {
 class CounterExamplesViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    private var presenter = CounterExamplesPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupNavigation()
         setupTableView()
     }
@@ -38,7 +38,7 @@ class CounterExamplesViewController: BaseViewController {
 extension CounterExamplesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return presenter.viewModel.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,6 +48,7 @@ extension CounterExamplesViewController: UITableViewDelegate, UITableViewDataSou
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifiers.exampleCell.rawValue, for: indexPath) as? CounterExampleTableViewCell else {
             return UITableViewCell()
         }
+        cell.configureCellWith(example: presenter.viewModel[indexPath.section])
         return cell
     }
 }
