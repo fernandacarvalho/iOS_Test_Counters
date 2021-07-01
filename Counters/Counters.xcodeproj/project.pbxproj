@@ -57,6 +57,8 @@
 		EF75E2EC268C19F0000F0F51 /* EmptyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2EA268C19F0000F0F51 /* EmptyListTableViewCell.swift */; };
 		EF75E2ED268C19F0000F0F51 /* EmptyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2EB268C19F0000F0F51 /* EmptyListTableViewCell.xib */; };
 		EF75E2EF268D61B1000F0F51 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2EE268D61B1000F0F51 /* NSObject+Extension.swift */; };
+		EF75E2F1268E5D6F000F0F51 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2F0268E5D6F000F0F51 /* Config.xcconfig */; };
+		EF75E2F3268E5EDC000F0F51 /* UtilUrlConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2F2268E5EDC000F0F51 /* UtilUrlConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +137,8 @@
 		EF75E2EA268C19F0000F0F51 /* EmptyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListTableViewCell.swift; sourceTree = "<group>"; };
 		EF75E2EB268C19F0000F0F51 /* EmptyListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyListTableViewCell.xib; sourceTree = "<group>"; };
 		EF75E2EE268D61B1000F0F51 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		EF75E2F0268E5D6F000F0F51 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		EF75E2F2268E5EDC000F0F51 /* UtilUrlConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilUrlConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +296,7 @@
 			children = (
 				35EAFB7625CC9E3A00DCFE10 /* Counters-Bridging-Header.h */,
 				DECA257925CC8D4300851431 /* Info.plist */,
+				EF75E2F0268E5D6F000F0F51 /* Config.xcconfig */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -338,6 +343,7 @@
 				EF15AF5A267DA83E003D36BF /* ScreenSizes.swift */,
 				EF15AF74267EF2B7003D36BF /* UtilUrlFactory.swift */,
 				EF75E2D5268BACBB000F0F51 /* SuccessAnimation.swift */,
+				EF75E2F2268E5EDC000F0F51 /* UtilUrlConfig.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -549,6 +555,7 @@
 				EF15AF68267ECA45003D36BF /* CounterTableViewCell.xib in Resources */,
 				EF75E2CC268A38E6000F0F51 /* CreateCounterView.xib in Resources */,
 				DECA257825CC8D4300851431 /* LaunchScreen.storyboard in Resources */,
+				EF75E2F1268E5D6F000F0F51 /* Config.xcconfig in Resources */,
 				EF75E2ED268C19F0000F0F51 /* EmptyListTableViewCell.xib in Resources */,
 				DEED7FCE25CC975D00BA0CDB /* Localizable.strings in Resources */,
 				EF75E2E5268BCC1C000F0F51 /* CounterLabelCollectionViewCell.xib in Resources */,
@@ -615,6 +622,7 @@
 				EF75E2DA268BC06C000F0F51 /* CounterExamplesViewController.swift in Sources */,
 				EF75E2EF268D61B1000F0F51 /* NSObject+Extension.swift in Sources */,
 				EF75E2EC268C19F0000F0F51 /* EmptyListTableViewCell.swift in Sources */,
+				EF75E2F3268E5EDC000F0F51 /* UtilUrlConfig.swift in Sources */,
 				350AF6E425E035840000F698 /* WelcomeFeatureView.swift in Sources */,
 				EF75E2D4268B9DED000F0F51 /* String+Extension.swift in Sources */,
 				EF15AF5B267DA83E003D36BF /* ScreenSizes.swift in Sources */,
@@ -790,6 +798,7 @@
 		};
 		DECA259325CC8D4300851431 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF75E2F0268E5D6F000F0F51 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -811,6 +820,7 @@
 		};
 		DECA259425CC8D4300851431 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF75E2F0268E5D6F000F0F51 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

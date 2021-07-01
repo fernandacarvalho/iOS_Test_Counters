@@ -1,0 +1,15 @@
+//
+//  Config.xcconfig
+//  Counters
+//
+//  Created by Fernanda FC. Carvalho on 01/07/21.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+HTTP=http:/$()/
+HTTPS=https:/$()/
+IP=127.0.0.1:3000
+
+BACKEND_URL = $(HTTP)$(IP)/api/v1
