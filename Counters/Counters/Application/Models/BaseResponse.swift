@@ -10,9 +10,11 @@ import Foundation
 public class BaseResponse: NSObject {
     var title: String = ""
     var message: String = ""
+    var extraInfo: String = ""
     
-    init(title: String, message: String){
+    init(title: String, message: String, extraInfo: String = ""){
         self.title = title
         self.message = message
+        self.extraInfo = extraInfo
     }
 }

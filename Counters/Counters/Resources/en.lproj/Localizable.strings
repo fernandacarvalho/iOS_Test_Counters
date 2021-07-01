@@ -45,3 +45,5 @@
 "COULDNT_DELETE_COUNTER" = "Couldn't delete counter";
 "SELECT_COUNTERS" = "Please, select at least one counter";
 "NO_COUNTER_SELECTED" = "No counter selected";
+"TRY_AGAIN" = "Please, try again.";
+"INTERNET_CONNECTION_OFFLINE" = "The Internet connection appears to be offline";

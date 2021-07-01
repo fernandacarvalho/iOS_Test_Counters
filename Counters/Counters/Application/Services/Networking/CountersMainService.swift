@@ -12,18 +12,23 @@ class CountersMainService: NSObject {
     func getDataFromServer(url: String,
                        completionHandler: @escaping (RequestResultType<Any>) -> Void) {
         
+        if currentReachabilityStatus == .notReachable {
+            let response = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("INTERNET_CONNECTION_OFFLINE", comment: ""))
+            completionHandler(.failure(response))
+            return
+        }
+        
         guard let requestUrl = URL(string: url) else {return}
         let service = Networking()
-        
         service.dataRequest(requestUrl, httpMethod: "GET", parameters: nil) { response, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
+                    let baseResponse = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: error!.localizedDescription)
                     completionHandler(.failure(baseResponse))
                     return
                 }
                 guard let data = response as? Data else {
-                    let baseResponse = self.getBaseResponseError(title: "Error", message: error?.localizedDescription ?? "Please, try again.")
+                    let baseResponse = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: error?.localizedDescription ?? NSLocalizedString("TRY_AGAIN", comment: ""))
                     completionHandler(.failure(baseResponse))
                     return
                 }
@@ -36,18 +41,24 @@ class CountersMainService: NSObject {
                        parameters: [String:String],
                        completionHandler: @escaping (RequestResultType<Any>) -> Void) {
         
+        if currentReachabilityStatus == .notReachable {
+            let response = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("INTERNET_CONNECTION_OFFLINE", comment: ""))
+            completionHandler(.failure(response))
+            return
+        }
+        
         guard let requestUrl = URL(string: url) else {return}
         let service = Networking()
         service.dataRequest(requestUrl, httpMethod: "POST", parameters: parameters) { [unowned self] response, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
+                    let baseResponse = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: error!.localizedDescription)
                     completionHandler(.failure(baseResponse))
                     return
                 }
                 
                 guard let data = response as? Data else {
-                    let baseResponse = self.getBaseResponseError(title: "Error", message: error?.localizedDescription ?? "Please, try again.")
+                    let baseResponse = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: error?.localizedDescription ?? NSLocalizedString("TRY_AGAIN", comment: ""))
                     completionHandler(.failure(baseResponse))
                     return
                 }
@@ -60,18 +71,24 @@ class CountersMainService: NSObject {
                        parameters: [String:String],
                        completionHandler: @escaping (RequestResultType<Any>) -> Void) {
         
+        if currentReachabilityStatus == .notReachable {
+            let response = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("INTERNET_CONNECTION_OFFLINE", comment: ""))
+            completionHandler(.failure(response))
+            return
+        }
+        
         guard let requestUrl = URL(string: url) else {return}
         let service = Networking()
         service.dataRequest(requestUrl, httpMethod: "DELETE", parameters: parameters) { [unowned self] response, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    let baseResponse = self.getBaseResponseError(title: "Error", message: error!.localizedDescription)
+                    let baseResponse = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: error!.localizedDescription)
                     completionHandler(.failure(baseResponse))
                     return
                 }
                 
                 guard let data = response as? Data else {
-                    let baseResponse = self.getBaseResponseError(title: "Error", message: error?.localizedDescription ?? "Please, try again.")
+                    let baseResponse = self.getBaseResponseError(title: NSLocalizedString("ERROR", comment: ""), message: error?.localizedDescription ?? NSLocalizedString("TRY_AGAIN", comment: ""))
                     completionHandler(.failure(baseResponse))
                     return
                 }
@@ -81,6 +98,6 @@ class CountersMainService: NSObject {
     }
     
     func getBaseResponseError(title: String, message: String) -> BaseResponse {
-        return BaseResponse(title: NSLocalizedString("ERROR", comment: ""), message: message)
+        return BaseResponse(title: title, message: message)
     }
 }

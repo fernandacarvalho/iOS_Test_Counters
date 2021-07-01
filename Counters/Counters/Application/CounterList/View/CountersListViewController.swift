@@ -39,6 +39,11 @@ class CountersListViewController: BaseViewController {
         getList()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        hidePlaceholderView()
+    }
+    
     //MARK: -Placeholder
     
     func configurePlaceholderView() {

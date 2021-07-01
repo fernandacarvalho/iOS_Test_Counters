@@ -24,6 +24,7 @@ class CountersListService: CountersMainService {
                     completionHandler(.failure(baseResponse))
                 }
             case .failure(let baseResponse):
+                baseResponse.title = NSLocalizedString("COULDNT_LOAD_COUNTERS", comment: "")
                 completionHandler(.failure(baseResponse))
             }
         }
@@ -47,6 +48,7 @@ class CountersListService: CountersMainService {
                     completionHandler(.failure(baseResponse))
                 }
             case .failure(let baseResponse):
+                baseResponse.title = NSLocalizedString("COULDNT_UPDATE_COUNTER", comment: "")
                 completionHandler(.failure(baseResponse))
             }
         }
@@ -70,6 +72,7 @@ class CountersListService: CountersMainService {
                     completionHandler(.failure(baseResponse))
                 }
             case .failure(let baseResponse):
+                baseResponse.title = NSLocalizedString("COULDNT_UPDATE_COUNTER", comment: "")
                 completionHandler(.failure(baseResponse))
             }
         }
@@ -95,7 +98,7 @@ class CountersListService: CountersMainService {
                 }
             case .failure(let baseResponse):
                 baseResponse.title = NSLocalizedString("COULDNT_DELETE_COUNTER", comment: "")
-                baseResponse.message = counterId
+                baseResponse.extraInfo = counterId
                 completionHandler(.failure(baseResponse))
             }
         }

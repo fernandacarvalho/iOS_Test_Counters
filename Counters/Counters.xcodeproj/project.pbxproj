@@ -56,6 +56,7 @@
 		EF75E2E9268BF31F000F0F51 /* CounterExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2E8268BF31F000F0F51 /* CounterExample.swift */; };
 		EF75E2EC268C19F0000F0F51 /* EmptyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2EA268C19F0000F0F51 /* EmptyListTableViewCell.swift */; };
 		EF75E2ED268C19F0000F0F51 /* EmptyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF75E2EB268C19F0000F0F51 /* EmptyListTableViewCell.xib */; };
+		EF75E2EF268D61B1000F0F51 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF75E2EE268D61B1000F0F51 /* NSObject+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		EF75E2E8268BF31F000F0F51 /* CounterExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterExample.swift; sourceTree = "<group>"; };
 		EF75E2EA268C19F0000F0F51 /* EmptyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListTableViewCell.swift; sourceTree = "<group>"; };
 		EF75E2EB268C19F0000F0F51 /* EmptyListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyListTableViewCell.xib; sourceTree = "<group>"; };
+		EF75E2EE268D61B1000F0F51 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				350AF6EC25E0365A0000F698 /* UIImage+Badge.swift */,
 				EF6D56F8267D8BEA00FC79E1 /* UIColor+Extension.swift */,
 				EF75E2D3268B9DED000F0F51 /* String+Extension.swift */,
+				EF75E2EE268D61B1000F0F51 /* NSObject+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				EF75E2CA268A38CF000F0F51 /* CreateCounterViewController.swift in Sources */,
 				EF15AF75267EF2B7003D36BF /* UtilUrlFactory.swift in Sources */,
 				EF75E2DA268BC06C000F0F51 /* CounterExamplesViewController.swift in Sources */,
+				EF75E2EF268D61B1000F0F51 /* NSObject+Extension.swift in Sources */,
 				EF75E2EC268C19F0000F0F51 /* EmptyListTableViewCell.swift in Sources */,
 				350AF6E425E035840000F698 /* WelcomeFeatureView.swift in Sources */,
 				EF75E2D4268B9DED000F0F51 /* String+Extension.swift in Sources */,

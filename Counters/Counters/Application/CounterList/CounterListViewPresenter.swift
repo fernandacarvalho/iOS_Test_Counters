@@ -108,7 +108,8 @@ final class CounterListViewPresenter {
                 selfObj.updateCounts()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
-                selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
+                let title = "\(error.title) '\(counter.title ?? "")'"
+                selfObj.delegate?.showAlert(withTitle: title, andMessage: error.message)
             }
         }
     }
@@ -127,7 +128,8 @@ final class CounterListViewPresenter {
                 selfObj.updateCounts()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
-                selfObj.delegate?.showAlert(withTitle: error.title, andMessage: error.message)
+                let title = "\(error.title) '\(counter.title ?? "")'"
+                selfObj.delegate?.showAlert(withTitle: title, andMessage: error.message)
             }
         }
     }
@@ -302,18 +304,19 @@ private extension CounterListViewPresenter {
             delegate?.stopLoading()
             navigationLeftButtonClicked()
             delegate?.refreshList()
-            if deleteErrors.count != 0 {
-                let title = NSLocalizedString("COULDNT_DELETE_COUNTER", comment: "")
-                var message = ""
+            if deleteErrors.count > 0 {
+                var title = NSLocalizedString("COULDNT_DELETE_COUNTER", comment: "")
+                let message = deleteErrors[0].message
                 for error in deleteErrors {
-                    let result = allCounters.filter({$0.id == error.message})
-                    if let counter = result.first, let title = counter.title {
-                        message += "\n \(title)"
+                    let result = allCounters.filter({$0.id == error.extraInfo})
+                    if let counter = result.first, let name = counter.title {
+                        title += " '\(name)' "
                     }
                 }
                 delegate?.showAlert(withTitle: title, andMessage: message)
             }
             selectedCounters = nil
+            deleteErrors = [BaseResponse]()
             deleteCount = 0
         }
     }
