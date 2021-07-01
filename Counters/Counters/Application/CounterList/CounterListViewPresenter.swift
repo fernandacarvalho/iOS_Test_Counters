@@ -133,7 +133,14 @@ final class CounterListViewPresenter {
     }
     
     func bottomViewLeftButtonClicked() {
-        createActionSheet()
+        if let rows = selectedCounters,
+           rows.count > 0 {
+            createDeletionActionSheet()
+        } else {
+            delegate?.showAlert(
+                withTitle: NSLocalizedString("NO_COUNTER_SELECTED", comment: ""),
+                andMessage: NSLocalizedString("SELECT_COUNTERS", comment: ""))
+        }
     }
     
     func bottomViewRightButtonClicked() {
@@ -252,7 +259,7 @@ private extension CounterListViewPresenter {
         return "Counted \(totalCount) times"
     }
     
-    func createActionSheet() {
+    func createDeletionActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.view.tintColor = .accentColor
         let cancelAction = UIAlertAction(title: NSLocalizedString("BTN_CANCEL", comment: ""), style: .cancel)
@@ -323,6 +330,10 @@ private extension CounterListViewPresenter {
                 }
             }
             delegate?.shareItems(items: items)
+        } else {
+            delegate?.showAlert(
+                withTitle: NSLocalizedString("NO_COUNTER_SELECTED", comment: ""),
+                andMessage: NSLocalizedString("SELECT_COUNTERS", comment: ""))
         }
     }
 }
