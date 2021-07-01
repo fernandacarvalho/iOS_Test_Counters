@@ -157,6 +157,7 @@ final class CounterListViewPresenter {
         isEditionMode = !isEditionMode
         delegate?.clearSearch(isEnabled: !isEditionMode)
         delegate?.reloadTableView()
+        selectedCounters = nil
     }
     
     func navigationRightButtonClicked() {
@@ -187,6 +188,7 @@ final class CounterListViewPresenter {
     func setSelectedTableViewRows(rows: [IndexPath]?) {
         selectedCounters = rows
     }
+
 }
 
 private extension CounterListViewPresenter {

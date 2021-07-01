@@ -42,6 +42,7 @@ class CountersListViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         hidePlaceholderView()
+        resetSearchBar()
     }
     
     //MARK: -Placeholder
@@ -79,6 +80,7 @@ class CountersListViewController: BaseViewController {
         resetSearchBar()
         getList()
         DispatchQueue.main.async {
+            self.presenter.setSelectedTableViewRows(rows: self.tableView.indexPathsForSelectedRows)
             self.tableView.refreshControl?.endRefreshing()
         }
     }
@@ -94,13 +96,8 @@ class CountersListViewController: BaseViewController {
     }
     
     private func updateNavigationState() {
-        if self.presenter.isEditionAvailable {
-            updateNavigationLeftBarButtonState(enabled: true)
-            updateNavigationRightBarButtonState(enabled: self.presenter.isEditionMode ? true : false)
-        } else {
-            updateNavigationLeftBarButtonState(enabled: false)
-            updateNavigationRightBarButtonState(enabled: false)
-        }
+        updateNavigationLeftBarButtonState(enabled: presenter.isEditionAvailable)
+        updateNavigationRightBarButtonState(enabled: presenter.isEditionAvailable && presenter.isEditionMode)
     }
     
     private func getList() {
@@ -136,7 +133,7 @@ class CountersListViewController: BaseViewController {
 //MARK: TABLEVIEW DELEGATE AND DATA SOURCE
 extension CountersListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.counters.count > 0 ?  presenter.counters.count : 1
+        return presenter.counters.count > 0 ? presenter.counters.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,6 +150,10 @@ extension CountersListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.setSelectedTableViewRows(rows: tableView.indexPathsForSelectedRows)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         presenter.setSelectedTableViewRows(rows: tableView.indexPathsForSelectedRows)
     }
 }
@@ -183,6 +184,10 @@ extension CountersListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         resetSearchBar()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
 }
 
 //MARK: PRESENTER DELEGATE
@@ -212,9 +217,7 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
         } else {
             tableView.allowsSelection = false
             tableView.allowsSelectionDuringEditing = false
-        }
-        
-        tableView.allowsMultipleSelectionDuringEditing = true
+        }        
         tableView.reloadData()
     }
     

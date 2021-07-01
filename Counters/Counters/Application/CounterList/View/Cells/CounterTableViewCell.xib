@@ -33,7 +33,7 @@
                                 <rect key="frame" x="30" y="0.0" width="260" height="98"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mf1-Wi-syS">
-                                        <rect key="frame" x="30" y="15" width="10" height="20"/>
+                                        <rect key="frame" x="25" y="15" width="10" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="ASM-Kc-ogp"/>
                                             <constraint firstAttribute="height" constant="20" id="fWg-MF-w2l"/>
@@ -117,7 +117,7 @@
                                     <constraint firstAttribute="trailing" secondItem="6HH-cf-ETy" secondAttribute="trailing" constant="10" id="9rt-W6-Dh3"/>
                                     <constraint firstAttribute="bottom" secondItem="rRw-1j-SMo" secondAttribute="bottom" constant="10" id="Hr4-dl-B1A"/>
                                     <constraint firstAttribute="bottom" secondItem="n6o-7y-yj1" secondAttribute="bottom" id="IIR-KP-uq6"/>
-                                    <constraint firstItem="Mf1-Wi-syS" firstAttribute="leading" secondItem="zu7-r3-fsC" secondAttribute="leading" constant="30" id="MDI-ug-gWN"/>
+                                    <constraint firstItem="Mf1-Wi-syS" firstAttribute="leading" secondItem="zu7-r3-fsC" secondAttribute="leading" constant="25" id="MDI-ug-gWN"/>
                                     <constraint firstAttribute="bottom" secondItem="BSb-UT-Tif" secondAttribute="bottom" constant="10" id="T0N-JN-Tq5"/>
                                     <constraint firstItem="Zxx-Mm-5X1" firstAttribute="centerX" secondItem="BSb-UT-Tif" secondAttribute="centerX" id="Xcc-wm-91x"/>
                                     <constraint firstItem="BSb-UT-Tif" firstAttribute="height" secondItem="rRw-1j-SMo" secondAttribute="height" id="Xew-LC-xlK"/>
@@ -127,7 +127,7 @@
                                     <constraint firstItem="6HH-cf-ETy" firstAttribute="leading" secondItem="n6o-7y-yj1" secondAttribute="trailing" constant="10" id="ooF-B1-tpP"/>
                                     <constraint firstItem="6HH-cf-ETy" firstAttribute="centerY" secondItem="Mf1-Wi-syS" secondAttribute="centerY" id="rt8-6q-2fi"/>
                                     <constraint firstAttribute="trailing" secondItem="rRw-1j-SMo" secondAttribute="trailing" constant="10" id="wSI-G2-7vR"/>
-                                    <constraint firstItem="n6o-7y-yj1" firstAttribute="leading" secondItem="Mf1-Wi-syS" secondAttribute="trailing" constant="10" id="xzB-gV-y8p"/>
+                                    <constraint firstItem="n6o-7y-yj1" firstAttribute="leading" secondItem="Mf1-Wi-syS" secondAttribute="trailing" constant="15" id="xzB-gV-y8p"/>
                                 </constraints>
                             </view>
                         </subviews>

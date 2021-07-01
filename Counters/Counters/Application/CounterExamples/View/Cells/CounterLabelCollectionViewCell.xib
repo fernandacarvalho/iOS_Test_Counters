@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="196" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="prG-6w-waR">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="prG-6w-waR" customClass="CountersCardView" customModule="Counters" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="196" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3M-D0-Pft">
@@ -35,11 +35,6 @@
                             <constraint firstItem="h3M-D0-Pft" firstAttribute="leading" secondItem="prG-6w-waR" secondAttribute="leading" constant="10" id="cNe-K2-HI3"/>
                             <constraint firstAttribute="bottom" secondItem="h3M-D0-Pft" secondAttribute="bottom" constant="10" id="gqk-4v-bXf"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="4"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
             </view>

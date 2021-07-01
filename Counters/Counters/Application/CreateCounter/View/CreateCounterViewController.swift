@@ -100,6 +100,7 @@ extension CreateCounterViewController: UITextFieldDelegate {
     @objc func nameTextFieldDidChange(_ textField: UITextField) {
         updateNavigationState()
     }
+    
 }
 
 //MARK: PRESENTER DELEGATE

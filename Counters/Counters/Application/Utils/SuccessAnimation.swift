@@ -25,9 +25,9 @@ public class SuccessAnimation: UIView, CAAnimationDelegate
         
         self.delegate = delegate
         backgroundColor = .green
-        let circleH = viewFrame.size.width/2
+        let circleH = viewFrame.size.width/4
         let circleX = viewFrame.size.width/2
-        let circleY = ((viewFrame.size.height - circleH)/2) + viewFrame.size.width/4
+        let circleY = ((viewFrame.size.height - circleH)/2) + viewFrame.size.width/8
         let path = UIBezierPath(arcCenter: CGPoint(x: circleX, y: circleY), radius: circleX/2, startAngle: 0.0, endAngle: CGFloat(.pi * 2.0), clockwise: true)
         setupCircleLayer(with: path, andLineWidth: 5.0)
     }

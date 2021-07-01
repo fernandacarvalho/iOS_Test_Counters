@@ -44,7 +44,7 @@ extension UIColor {
         static var descriptionText: UIColor
     
     @Theme(light: UIColor(named: "DisabledText") ?? UIColor(hexString: "#DCDCDF"),
-               dark: UIColor(named: "DisabledText") ?? UIColor(hexString: "#DCDCDF"))
+               dark: UIColor(named: "DisabledText") ?? UIColor(hexString: "#444444"))
         static var disabledText: UIColor
     
     @Theme(light: UIColor(named: "Green") ?? UIColor(hexString: "#4BD963"),
