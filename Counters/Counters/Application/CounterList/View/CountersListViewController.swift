@@ -60,7 +60,6 @@ class CountersListViewController: BaseViewController {
     }
     
     @objc func placeholderActionHandler() {
-        hidePlaceholderView()
         presenter.placeholderButtonClicked()
     }
     
@@ -200,6 +199,10 @@ extension CountersListViewController: CounterListViewPresenterDelegate {
     func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String) {
         placeholderView.setInfo(with: title, subtitle: subtitle, btnTitle: btnTitle)
         showPlaceholderView()
+    }
+    
+    func removePlaceholder() {
+        hidePlaceholderView()
     }
     
     func stopLoading() {

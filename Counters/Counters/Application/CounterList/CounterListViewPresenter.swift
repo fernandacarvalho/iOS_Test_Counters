@@ -21,6 +21,7 @@ protocol CounterListViewPresenterDelegate: AnyObject {
     func clearSearch(isEnabled: Bool)
     func goToCreateCounter()
     func showPlaceholder(withTitle title: String, subtitle: String, btnTitle: String)
+    func removePlaceholder()
     func showAlert(withTitle title: String, andMessage message: String)
     func stopLoading()
     func showLoading()
@@ -72,6 +73,7 @@ final class CounterListViewPresenter {
             case .success(let counters):
                 selfObj.allCounters = counters
                 selfObj.delegate?.getCountersSuccess()
+                selfObj.resetPlaceholder()
                 selfObj.checkEmptyCountersList()
                 selfObj.updateCounts()
             case .failure(let error):
@@ -89,6 +91,7 @@ final class CounterListViewPresenter {
             delegate?.refreshList()
         case .createCounter:
             delegate?.goToCreateCounter()
+            resetPlaceholder()
         default:
             break
         }
@@ -215,6 +218,11 @@ private extension CounterListViewPresenter {
             withTitle: error.title,
             subtitle: error.message,
             btnTitle:  NSLocalizedString("RETRY", comment: ""))
+    }
+    
+    func resetPlaceholder() {
+        placeholderAction = .none
+        delegate?.removePlaceholder()
     }
     
     func updateCounts() {
