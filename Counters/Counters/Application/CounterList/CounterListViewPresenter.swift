@@ -107,8 +107,8 @@ final class CounterListViewPresenter {
             switch response {
             case .success(let counters):
                 selfObj.allCounters = counters
-                selfObj.delegate?.counterUpdateCountingSuccess()
                 selfObj.updateCounts()
+                selfObj.delegate?.counterUpdateCountingSuccess()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
                 let title = "\(error.title) '\(counter.title ?? "")'"
@@ -127,8 +127,8 @@ final class CounterListViewPresenter {
             switch response {
             case .success(let counters):
                 selfObj.allCounters = counters
-                selfObj.delegate?.counterUpdateCountingSuccess()
                 selfObj.updateCounts()
+                selfObj.delegate?.counterUpdateCountingSuccess()
             case .failure(let error):
                 selfObj.delegate?.stopLoading()
                 let title = "\(error.title) '\(counter.title ?? "")'"
