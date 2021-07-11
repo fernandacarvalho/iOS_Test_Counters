@@ -14,6 +14,7 @@ protocol CounterTableViewCellDelegate: AnyObject {
 
 class CounterTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var selectBtnView: UIView!
     @IBOutlet weak var selectButton: UIImageView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -58,7 +59,7 @@ class CounterTableViewCell: UITableViewCell {
             decreaseBtn.isEnabled = false
             increaseBtn.isEnabled = false
         }
-        selectButton.isHidden = updateAvailable
+        selectBtnView.isHidden = updateAvailable
     }
     
     @IBAction func decreaseCounterClicked(_ sender: Any) {
