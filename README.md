@@ -1,12 +1,4 @@
- # Cornershop iOS Development Test
-
-### Before you begin
-
-You will need to create a private GitHub repository using the information that we provided in this README. When you finish your test, share the project with [@Cornershop-HR](https://github.com/Cornershop-HR) and let your recruiter know.
-
-Should you have any questions (UI design, deadlines, etc), please reach out to the recruiter.
-
-Please read this whole README file. It's very important that you follow the instructions properly. That being said, we like surprises.
+ # iOS Development Test
 
 ## The Test
 We just provided you a base project, an iOS app for counting things. The project contains some components that are there to help you build quickly 🚀 However, you'll need to meet expectations for quality and functionality.
@@ -215,6 +207,3 @@ Here are the endpoints with examples of the corresponding bodies which should be
 
 ---
 
-![Sir Jonathan Paul "Jony" Ive](Jony.jpg)
-
-_"Design it to look like my sh*t." -J_
